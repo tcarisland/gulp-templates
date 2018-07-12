@@ -15,10 +15,16 @@ const Menu = electron.Menu;
         label: "Electron Designer",
         submenu: [
           {
-            label:"About",
+            label:"Open file",
             click: () => {
               const{dialog} = require('electron')
               console.log(dialog.showOpenDialog({properties: ['openFile', 'openDirectory', 'multiSelections']}))
+            }
+          },
+          {
+            label:"Exit",
+            click: () => {
+              app.quit();
             }
           }
         ]
