@@ -1,0 +1,20 @@
+{
+  "name": "electrondesigner",
+  "version": "1.0.0",
+  "description": "Svg Stuff",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "Svg"
+  ],
+  "author": "Thor Arisland",
+  "license": "ISC",
+  "devDependencies": {
+    "bootstrap": "^4.1.2",
+    "electron": "^2.0.4",
+    "gulp": "^3.9.1",
+    "jquery": "^3.3.1"
+  }
+}
