@@ -12,7 +12,9 @@
     "file-system": "^2.2.2",
     "gulp": "^4.0.2",
     "gulp-cli": "^2.2.0",
-    "gulp-sftp": "^0.1.5",
     "prompt": "^1.0.0"
+  },
+  "dependencies": {
+    "vinyl-ftp": "^0.6.1"
   }
 }

@@ -1,8 +1,6 @@
 {
-    "host": "sftp-hostname",
-    "user": "username",
-    "port": "22",
-    "remotePath": "path", // Path on remote server
-    "privateKey": "~/.ssh/id_rsa", // Remember to use expand-tilde or absolute path
-    "timeout": "30000"
+    "host": "",
+    "user": "",
+    "port": "",
+    "pass" : ""
 }

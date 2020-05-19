@@ -3,6 +3,9 @@
 <head>
 </head>
 <body>
-  Hello, World!
+  <?php
+   $date = "" . date("d m Y");
+   echo "Hello, Thor - " . $date;
+   ?>
 </body>
 </html>
