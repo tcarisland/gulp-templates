@@ -24,7 +24,7 @@ function tc_plugin_activation() {
   dbDelta($sql);
 
   $result = "This is the result of the Query";
-  set_transient( 'tc-project-planner-notice', $result, 5 );
+  set_transient( 'tc-project-planner-notice', $wpdb->get_results(), 5 );
 }
 
 function tc_render_menu_page() {

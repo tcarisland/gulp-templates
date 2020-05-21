@@ -21,7 +21,16 @@ function tc_plugin_admin_notice(){
 function tc_plugin_admin_ajax_request() {
   $projectName = $_POST['projectName'];
   $projectDescription = $_POST['projectDescription'];
-  echo strrev($projectName . " " . $projectDescription);
+  global $wpdb;
+  $table_name = $wpdb->prefix . 'tc_project_planner_projects';
+  $wpdb->insert(
+    $table_name,
+    array(
+      'name' => $projectName,
+      'description' => $projectDescription
+    )
+  );
+  echo strrev($wpdb->get_results());
 	wp_die();
 }
 
