@@ -4,7 +4,7 @@ const ftp    = require('vinyl-ftp');
 const prompt = require('prompt');
 
 var login = require('./login.json');
-var globs = [ 'dist/*' ];
+var globs = [ 'dist/*', 'dist/**' ];
 
 gulp.task('deploy', function() {
   const conn = ftp({
@@ -14,17 +14,21 @@ gulp.task('deploy', function() {
 	port: login.port,
 	parallel: 10,
 	reload: true
-
-    });
-    return gulp.src(globs, { base: './dist', buffer: false } ).pipe(conn.dest('/www/wp-content/plugins/tc-project-planner'));
+  });
+  return gulp.src(globs, { base: './dist', buffer: false } ).pipe(conn.dest('/www/wp-content/plugins/tc-project-planner'));
 });
 
 gulp.task('copy-php', function() {
     return gulp.src('src/*.php').pipe(gulp.dest('dist/'));
 });
 
-gulp.task('watch', function() {
-  return gulp.watch('src/*', gulp.series(['copy-php', 'deploy']));
+gulp.task('copy-js', function() {
+    return gulp.src('src/js/*.js').pipe(gulp.dest('dist/js/'));
 });
 
-gulp.task('default', gulp.series(['copy-php', 'deploy']));
+
+gulp.task('watch', function() {
+  return gulp.watch(['src/*', 'src/js/*'], gulp.series(['copy-php', 'copy-js', 'deploy']));
+});
+
+gulp.task('default', gulp.series(['copy-php', 'copy-js', 'deploy']));
