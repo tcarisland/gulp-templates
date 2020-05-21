@@ -1,7 +1,6 @@
 const gulp   = require('gulp');
 const watch  = require('gulp-watch');
 const ftp    = require('vinyl-ftp');
-const fs     = require('file-system');
 const prompt = require('prompt');
 
 var login = require('./login.json');
