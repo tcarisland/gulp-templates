@@ -15,3 +15,15 @@ function tc_say_hello() {
 			alert('Got this from the server: ' + response);
 		});
 }
+
+function listProjects() {
+  console.log("List Projects clicked");
+}
+
+function listTasks() {
+  console.log("List Tasks clicked");
+}
+
+function listCategories() {
+  console.log("List Categories clicked");
+}
