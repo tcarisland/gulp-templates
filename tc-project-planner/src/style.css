@@ -1,0 +1,5 @@
+.tc_horizontal_list {
+  display: inline;
+  float: left;
+  margin: 10px;
+}

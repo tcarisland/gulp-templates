@@ -16,5 +16,12 @@
    ?>
    <br>
    <button onclick="tc_say_hello()">Click Me!</button>
+   <br>
+   <ul class="tc_horizontal_list">
+     <li class="tc_horizontal_list">List Projects</li>
+     <li class="tc_horizontal_list">List Tasks</li>
+     <li class="tc_horizontal_list">Add Projects</li>
+     <li class="tc_horizontal_list">Add Tasks</li>
+   </ul>
 </body>
 </html>

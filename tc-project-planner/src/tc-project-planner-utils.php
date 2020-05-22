@@ -2,7 +2,9 @@
 
 function tc_plugin_deps() {
   $script_file = plugin_dir_url(__FILE__) . "js/tc-project-planner.js";
+  $style_file = plugin_dir_url(__FILE__) . "style.css";
   wp_enqueue_script("tc_plugin_script", $script_file, false);
+  wp_enqueue_style("tc_plugin_style", $style_file, false);
 }
 
 function tc_plugin_admin_notice(){
