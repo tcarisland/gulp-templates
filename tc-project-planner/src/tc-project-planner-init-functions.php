@@ -22,8 +22,6 @@ function tc_plugin_activation() {
   ) $charset_collate;";
   require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
   dbDelta($sql);
-
-  $result = "This is the result of the Query";
   set_transient( 'tc-project-planner-notice', $wpdb->get_results(), 5 );
 }
 
