@@ -36,18 +36,22 @@ function tc_plugin_admin_ajax_request() {
 	wp_die();
 }
 
-function list_projects_db_query() {
-    global $wpdb;
-    $table_name = $wpdb->prefix . "tc_project_planner_projects";
-    $charset_collate = $wpdb->get_charset_collate();
-    $sql = "SELECT * FROM $table_name;";
-    $results = $wpdb->get_results($sql);
+function list_and_render_projects() {
+    $results = list_projects_db_query();
     $data = "";
     $row_index = 0;
     foreach($results as $row) {
       $data .= render_project_entry($row, ++$row_index);
     }
     return $data;
+}
+
+function list_projects_db_query() {
+  global $wpdb;
+  $table_name = $wpdb->prefix . "tc_project_planner_projects";
+  $charset_collate = $wpdb->get_charset_collate();
+  $sql = "SELECT * FROM $table_name;";
+  return $wpdb->get_results($sql);
 }
 
 function render_column_name($column) {
@@ -59,19 +63,18 @@ function render_column_name($column) {
 }
 
 function tc_plugin_admin_ajax_switch_view() {
-  switch_view($_POST['view']);
-}
-
-function switch_view($view) {
-  switch($view) {
+  ini_set('display_errors', 1);
+  ini_set('display_startup_errors', 1);
+  error_reporting(E_ALL);
+  switch($_POST['view']) {
     case "listProjects":
-      include("admin-list-projects.php");
+      include "project/project-list.php";
       break;
     case "addProject":
-      include("admin-add-project.php");
+      include "admin-add-project.php";
       break;
     case "listTasks":
-      echo "List Tasks Selected";
+      echo "List Tasks selected";
       break;
     case "listCategories":
       echo "List Categories Selected";
