@@ -16,6 +16,17 @@ function tcSayHello() {
 		});
 }
 
+function toggleAccordion(item) {
+  var panel = document.getElementById(item);
+  if (panel.style.maxHeight) {
+    console.log("toggleAccordion IF");
+    panel.style.maxHeight = null;
+  } else {
+    panel.style.border = "1px solid #303030";
+    panel.style.maxHeight = panel.scrollHeight + "px";
+  } 
+}
+
 function switchView(viewname) {
   var data = {
     'action': 'switch_admin_view',

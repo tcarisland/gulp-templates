@@ -37,29 +37,33 @@ function tc_plugin_admin_ajax_request() {
 }
 
 function list_projects_db_query() {
-    error_reporting(-1);
-    ini_set('display_errors', 'On');
     global $wpdb;
     $table_name = $wpdb->prefix . "tc_project_planner_projects";
     $charset_collate = $wpdb->get_charset_collate();
     $sql = "SELECT * FROM $table_name;";
     $results = $wpdb->get_results($sql);
     $data = "";
+    $row_index = 0;
     foreach($results as $row) {
-      foreach($row as $key => $value) {
-          $data .= $key . " : " . $value . " ";
-      }
-      $data .= "<br>\n";
+      $data .= render_project_entry($row, ++$row_index);
     }
     return $data;
 }
 
-function render_project_entry() {
-  
+function render_column_name($column) {
+  if(strpos($column, "_") !== false) {
+    $column = str_replace("_", " ", $column);    
+  }
+  $column = ucfirst($column);
+  return "<b> " . $column . "</b>";
 }
 
 function tc_plugin_admin_ajax_switch_view() {
-  switch($_POST['view']) {
+  switch_view($_POST['view']);
+}
+
+function switch_view($view) {
+  switch($view) {
     case "listProjects":
       include("admin-list-projects.php");
       break;
