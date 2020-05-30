@@ -1,14 +1,17 @@
-const http = require('http');
+const { app, BrowserWindow } = require('electron')
 
-const hostname = '127.0.0.1';
-const port = 3000;
+function createWindow() {
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('ContentType', "text/html");
-  res.end(require("index.html"));
-});
+    const win = new BrowserWindow({
+	width: 800,
+	height: 600,
+	webPreferences: {
+	    nodeIntegration: true
+	}
+    })
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+    win.loadFile('index.html')
+    
+}
+
+app.whenReady().then(createWindow)
