@@ -17,6 +17,15 @@
   padding: 5px;
 }
 
+.calendarDayHours {
+  display: grid;
+  grid-auto-flow: row;
+}
+
+.calendarHour {
+  border: 1px solid rgba(0,0,0,0.3);
+}
+
 .calendarDay {
   display: grid;
   width: 100%;
