@@ -1,6 +1,7 @@
 const { app, shell, dialog, BrowserWindow, Menu } = require('electron')
 const defaultMenu = require('electron-default-menu');
 const fs = require('fs');
+let win;
 
 function onImportScheduleClicked(item, focusedWindow) {
   dialog.showOpenDialog(BrowserWindow, {
@@ -13,7 +14,7 @@ function onImportScheduleClicked(item, focusedWindow) {
     }
   }).catch(err => {
     console.log(err)
-    showMessage(err);
+    dialog.showErrorBox(err);
   })
 }
 
@@ -24,12 +25,13 @@ function openFile(filepath) {
       dialog.showErrorBox("Filesystem Error", "Could not read file : " + filepath);
     } else {
       console.log("Asynchronous read: " + data.toString());
+      win.webContents.executeJavaScript("calendar.import(" + data.toString() + ")");
     }
   })
 }
 
 function createWindow() {
-  const win = new BrowserWindow({
+  win = new BrowserWindow({
 	width: 1100,
 	height: 800,
 	webPreferences: {

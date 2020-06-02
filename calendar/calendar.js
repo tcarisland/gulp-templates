@@ -7,8 +7,8 @@ $(document).ready(function() {
     "friday" : "",
     "saturday" : "",
     "sunday" : "",
-    "funday" : "",
-    "dumbday" : ""
+    "monday" : "",
+    "tuesday" : "",
   }
 	calendar.init(days);
   calendar.add(["08:00", "12:00"], "wednesday");
@@ -32,21 +32,51 @@ var calendar = ( function() {
   }
   
   var addInterval = function(interval, day) {
-    //grid-row: 1;  margin-top: 1320px; height: 30px;
     var from = timeToInt(interval[0]);
     var to = timeToInt(interval[1]);
     var intervalID = "interval_" + from + "_" + to;
     var intervalText = interval[0] + " - " + interval[1]
-    var intervalElement = "<div id='" + intervalText +"' title='" + intervalText + "' class='openingHours' style='grid-row: 1; margin-top: " + from + "px; height: " + (to - from) + "px; grid-column: " + day + ";'>";
+    var intervalElement = "<div id='"; 
+    intervalElement += intervalText;
+    intervalElement += "' title='"; 
+    intervalElement += intervalText;
+    intervalElement += "' class='openingHours' style='grid-row: 1; margin-top: " + from;
+    intervalElement += "px; height: " + (to - from);
+    intervalElement += "px; grid-column: " + day + ";'>";
     intervalElement += "<div class='openingHoursText'>" + intervalText + "</div>";
     intervalElement += "</div>";
-    console.log(intervalElement);
     $("#schedule").append(intervalElement);
+  }
+  
+  var importSchedule = function(schedule) {
+    initialize(schedule);
+    for(day in schedule) {
+      intervalList = schedule[day]["intervals"];  
+      for(var i = 0; i < intervalList.length; i++) {
+        var interval = intervalList[i];
+        var from = interval["from"];
+        var to = interval["to"];
+        addInterval([from, to], day);
+      }
+    }
   }
   
   function timeToInt(time) {
     var hoursAndMinutes = time.split(":");
     return parseInt(hoursAndMinutes[0]) * 60 + parseInt(hoursAndMinutes[1]);
+  }
+  
+  function dayIdToDay(dayId) {
+    const regex = /day(\d{2})_(\d{2})_(\d{4})/gi;
+    return day.replace(regex, "$1 $2 $3");
+  }
+  
+  function extractDayName(day, days) {
+    if(days[day]["weekday"] !== undefined) {
+      return days[day]["weekday"] + "<br> " + dayIdToDay(day);
+    } else {
+      return day.charAt(0).toUpperCase() + day.slice(1);
+    }
   }
 
 	var initialize = function (days) {
@@ -56,27 +86,27 @@ var calendar = ( function() {
     for(day in days) {
       gridTemplateColumns += "[" + day + "] 150px\n ";
     }
-    console.log("gridTemplateColumns : " + gridTemplateColumns);
     $("#schedule").css("grid-template-columns", gridTemplateColumns);
     $("#scheduleHeader").css("grid-template-columns", gridTemplateColumns);
     var d = 6;
   	for(day in days) {
       var col = intToColor(d--);
-      $("#scheduleHeader").append("<div class='day' style='background-color: " + col + ";'><div class='dayText'>" + day.charAt(0).toUpperCase() + day.slice(1) + "</div></div>");
-      var dayAppend = "<div class='" + day +"'" 
+      $("#scheduleHeader").append("<div class='day' style='background-color: " + col + ";'><div class='dayText'>" + extractDayName(day, days) + "</div></div>");
+      var dayAppend = "<div id='" + day +"'" 
       dayAppend += " style='grid-column: " + day + "; grid-row: 1/span24; background-color: " + col + "; '"
       dayAppend += "></div>";
       $("#schedule").append(dayAppend);
     	for(var h = 0; h < 24; h++) {
       	var bgcolor = h % 2 == 1 ? "rgba(0, 0, 0, 0.05)" : "transparent"
       	var append = "<div class='hour' style='grid-row: " + h + "; grid-column: " + day + "; background-color: " + bgcolor + ";'><div class='hourText'>" + intToHour(h) + "</div></div>";
-        $("." + day).append(append);
+        $("#" + day).append(append);
       }
     }
 	}
 
 	return {
   	init : initialize,
-    add : addInterval
+    add : addInterval,
+    import : importSchedule
   }
 }());
