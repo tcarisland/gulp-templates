@@ -12,5 +12,6 @@
     "electron": "^9.0.0",
     "electron-default-menu": "^1.0.1",
     "jquery": "^3.5.1"
-  }
+  },
+  "dependencies": {}
 }
