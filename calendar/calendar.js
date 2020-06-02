@@ -1,79 +1,60 @@
 $(document).ready(function() {
-    calendar.render();
-});
-
-$(window).resize(function() {
-  calendar.render();
-});
-
-var calendar = (function () {
-  var iter = 0;
-  var transp = 0.2;
   var days = {
-    "Monday" : {
-      bgcolor : "rgba(64, 128, 255, " + transp + ")"
-    },
-    "Tuesday" : {
-      bgcolor : "rgba(255, 0, 0, " + transp + ")"
-    },
-    "Wednesday" : {
-      bgcolor : "rgba(0, 255, 0, " + transp + ")"
-    },
-    "Thursday" : {
-      bgcolor : "rgba(0, 0, 255, " + transp + ")"
-    },
-    "Friday" : {
-      bgcolor : "rgba(255, 255, 0, " + transp + ")"
-    },
-    "Saturday" : {
-      bgcolor : "rgba(0, 255, 255, " + transp + ")"
-    },
-    "Sunday" : {
-      bgcolor : "rgba(255, 0, 255, " + transp + ")"
-    }
-  };
+    "monday" : "",
+    "tuesday" : "",
+    "wednesday" : "",
+    "thursday" : "",
+    "friday" : "",
+    "saturday" : "",
+    "sunday" : "",
+    "funday" : "",
+    "dumbday" : ""
+  }
+	calendar.init(days);
+});
 
-  function renderHours(dayId) {
-    var hoursList = "";
-    for(var i = 0; i < 24; i++) {
-        hoursList += "<div class='calendarHour'>" + i + "</div>\n";
-    }
-    return {
-      hours : hoursList,
-    }
+var calendar = ( function() {
+
+  function intToColor(str) {
+  	var binstr = "00" + (str >>> 0).toString(2);
+    binstr = binstr.substr(binstr.length - 3);
+  	var color = "rgba("
+  	for(var i = 0; i < 3; i++) { color += binstr.charAt (i) == "1" ? "255, " : "0, "; }
+    color += "0.2)"
+    return color;
+  }
+  
+  function intToHour(h) {
+    return ("0" + h).substr(("0" + h).length - 2) + ":00";
   }
 
-  function renderCalendar() {
-    var templateColumns = "";
-    for(var i = 0; i < Object.keys(days).length; i++) {
-      templateColumns += "auto ";
+	var initialize = function (days) {
+    $("#schedule").empty();
+    $("#scheduleHeader").empty();
+    var gridTemplateColumns = "";
+    for(day in days) {
+      gridTemplateColumns += "[" + day + "] 150px\n ";
     }
-    $("#calendarWrapper").html("");
-    $("#calendarWrapper").css("grid-template-columns", templateColumns);
-    for(var day in days) {
-      var color = days[day].bgcolor;
-      var border = day != "Sunday" ? "3px solid #FFF" : "none";
-      var style = "text-align: center; background-color: " + color + "; border-right: " + border + ";";
-      $("#calendarWrapper").append("<div id='calendar" + day + "' style='" + style + "'></div>");
-      $("#calendar" + day).append("<div id='calendar" + day + "Hours' class='calendarDayHours'></div>");
-      hoursData = renderHours("calendar" + day);
-      $("#calendar" + day + "Hours").css("display", "grid");
-      $("#calendar" + day + "Hours").css("height", "100%");
-      $("#calendar" + day + "Hours").append(hoursData.hours);
-      renderSchedule();
+    console.log("gridTemplateColumns : " + gridTemplateColumns);
+    $("#schedule").css("grid-template-columns", gridTemplateColumns);
+    $("#scheduleHeader").css("grid-template-columns", gridTemplateColumns);
+    var d = 6;
+  	for(day in days) {
+      var col = intToColor(d--);
+      $("#scheduleHeader").append("<div class='day' style='background-color: " + col + ";'><div class='dayText'>" + day.charAt(0).toUpperCase() + day.slice(1) + "</div></div>");
+      var dayAppend = "<div class='" + day +"'" 
+      dayAppend += " style='grid-column: " + day + "; grid-row: 1/span24; background-color: " + col + "; '"
+      dayAppend += "></div>";
+      $("#schedule").append(dayAppend);
+    	for(var h = 0; h < 24; h++) {
+      	var bgcolor = h % 2 == 1 ? "rgba(0, 0, 0, 0.05)" : "transparent"
+      	var append = "<div class='hour' style='grid-row: " + h + "; grid-column: " + day + "; background-color: " + bgcolor + ";'><div class='hourText'>" + intToHour(h) + "</div></div>";
+        $("." + day).append(append);
+      }
     }
-  }
+	}
 
-  function renderSchedule() {
-    for(var day in days) {
-      var top = document.getElementById("calendar" + day + "Hours").offsetHeight * -1;
-      var left = document.getElementById("calendar" + day + "Hours").offsetWidth * -1;
-      console.log("top : " + top + " left : " + left);
-      $("#calendar" + day).append("<span style='position: relative; top: " + top + "; left: " + left + "; background-color: rgba(0,0,0,0.3); height: 80%; width: 30%'></span>")
-    }
-  }
-
-  return {
-    render : renderCalendar
+	return {
+  	init : initialize
   }
 }());

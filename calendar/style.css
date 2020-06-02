@@ -1,33 +1,56 @@
-#calendarWrapper {
-  position: absolute;
-  display: grid;
-  margin: 10px;
-  top: 10px;
-  right: 10px;
-  bottom: 10px;
-  left: 10px;
-  overflow-y: auto;
-  font-family: "Lucida Sans", Geneva, Verdana, sans-serif;
+body {
+  font-family: Verdana, Geneva, sans-serif;
   font-size: 10px;
+  color: rgba(0, 0, 0, 0.4);
 }
 
-.calendarDayHeader {
-  border-bottom: 3px solid #FFF;
-  text-align: left;
-  padding: 5px;
-}
-
-.calendarDayHours {
-  display: grid;
-  grid-auto-flow: row;
-}
-
-.calendarHour {
-  border: 1px solid rgba(0,0,0,0.3);
-}
-
-.calendarDay {
-  display: grid;
+#scheduleWrapper {
+  height: 680px;
   width: 100%;
-  height: 100%;
+  height: 80%;
+  overflow-y: auto;
+}
+
+#scheduleHeader {
+  display: grid;
+  height: 50px;
+}
+
+#schedule {
+  padding: 0px;
+  margin-top: 20px;
+  display: grid;
+  grid-template-rows: repeat(24, 60px);
+
+}
+
+.day {
+  height: 58px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 98%;
+  display: flex;
+}
+
+.dayText {
+  margin: 5px;
+  color: #000;
+  font-size: 18px;
+}
+
+.hour {
+  height: 58px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 98%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.hourText {
+  font-weight: bold;
+  display: flex;
+  margin: 5px;
+}
+
+.openingHours {
+  border: 1px solid rgba(0, 0, 255, 0.5);
 }
