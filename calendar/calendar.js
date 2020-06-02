@@ -1,19 +1,21 @@
 $(document).ready(function() {
   var days = {
-    "monday" : "",
-    "tuesday" : "",
-    "wednesday" : "",
-    "thursday" : "",
-    "friday" : "",
-    "saturday" : "",
-    "sunday" : "",
-    "monday" : "",
-    "tuesday" : "",
+    "day01_06_2020" : {"weekday" : "Monday"},
+    "day02_06_2020" : {"weekday" : "Tuesday"},
+    "day03_06_2020" : {"weekday" : "Wednesday"},
+    "day04_06_2020" : {"weekday" : "Thursday"},
+    "day05_06_2020" : {"weekday" : "Friday"},
+    "day06_06_2020" : {"weekday" : "Saturday"},
+    "day07_06_2020" : {"weekday" : "Sunday"},
+    "day08_06_2020" : {"weekday" : "Monday"},
+    "day09_06_2020" : {"weekday" : "Tuesday"},
+    "day10_06_2020" : {"weekday" : "Wednesday"},
+    "day11_06_2020" : {"weekday" : "Thursday"},
+    "day12_06_2020" : {"weekday" : "Friday"},
+    "day13_06_2020" : {"weekday" : "Saturday"},
+    "day14_06_2020" : {"weekday" : "Sunday"}
   }
 	calendar.init(days);
-  calendar.add(["08:00", "12:00"], "wednesday");
-  calendar.add(["11:30", "14:45"], "wednesday");
-  calendar.add(["13:00", "17:00"], "wednesday");
 });
 
 var calendar = ( function() {
@@ -30,8 +32,8 @@ var calendar = ( function() {
   function intToHour(h) {
     return ("0" + h).substr(("0" + h).length - 2) + ":00";
   }
-  
-  var addInterval = function(interval, day) {
+
+  var addInterval = function(interval, day, weekday) {
     var from = timeToInt(interval[0]);
     var to = timeToInt(interval[1]);
     var intervalID = "interval_" + from + "_" + to;
@@ -39,7 +41,7 @@ var calendar = ( function() {
     var intervalElement = "<div id='"; 
     intervalElement += intervalText;
     intervalElement += "' title='"; 
-    intervalElement += intervalText;
+    intervalElement += intervalText + "\n" + weekday + "\n" + dayIdToDay(day);
     intervalElement += "' class='openingHours' style='grid-row: 1; margin-top: " + from;
     intervalElement += "px; height: " + (to - from);
     intervalElement += "px; grid-column: " + day + ";'>";
@@ -56,7 +58,7 @@ var calendar = ( function() {
         var interval = intervalList[i];
         var from = interval["from"];
         var to = interval["to"];
-        addInterval([from, to], day);
+        addInterval([from, to], day, schedule[day]["weekday"]);
       }
     }
   }

@@ -24,7 +24,6 @@ function openFile(filepath) {
     if(err) {
       dialog.showErrorBox("Filesystem Error", "Could not read file : " + filepath);
     } else {
-      console.log("Asynchronous read: " + data.toString());
       win.webContents.executeJavaScript("calendar.import(" + data.toString() + ")");
     }
   })
