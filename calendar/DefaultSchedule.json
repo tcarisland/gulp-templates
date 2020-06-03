@@ -1,0 +1,54 @@
+{
+  "day01_06_2020": {
+    "weekday": "Monday",
+    "intervals": [
+      {
+        "from": "08:00",
+        "to": "11:30"
+      },
+      {
+        "from": "12:30",
+        "to": "17:00"
+      }
+    ]
+  },
+  "day02_06_2020": {
+    "weekday": "Tuesday"
+  },
+  "day03_06_2020": {
+    "weekday": "Wednesday"
+  },
+  "day04_06_2020": {
+    "weekday": "Thursday"
+  },
+  "day05_06_2020": {
+    "weekday": "Friday"
+  },
+  "day06_06_2020": {
+    "weekday": "Saturday"
+  },
+  "day07_06_2020": {
+    "weekday": "Sunday"
+  },
+  "day08_06_2020": {
+    "weekday": "Monday"
+  },
+  "day09_06_2020": {
+    "weekday": "Tuesday"
+  },
+  "day10_06_2020": {
+    "weekday": "Wednesday"
+  },
+  "day11_06_2020": {
+    "weekday": "Thursday"
+  },
+  "day12_06_2020": {
+    "weekday": "Friday"
+  },
+  "day13_06_2020": {
+    "weekday": "Saturday"
+  },
+  "day14_06_2020": {
+    "weekday": "Sunday"
+  }
+}

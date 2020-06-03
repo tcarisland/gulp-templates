@@ -1,52 +1,12 @@
 $(document).ready(function() {
-  var days = {
-    "day01_06_2020": {
-      "weekday": "Monday"
-    },
-    "day02_06_2020": {
-      "weekday": "Tuesday"
-    },
-    "day03_06_2020": {
-      "weekday": "Wednesday"
-    },
-    "day04_06_2020": {
-      "weekday": "Thursday"
-    },
-    "day05_06_2020": {
-      "weekday": "Friday"
-    },
-    "day06_06_2020": {
-      "weekday": "Saturday"
-    },
-    "day07_06_2020": {
-      "weekday": "Sunday"
-    },
-    "day08_06_2020": {
-      "weekday": "Monday"
-    },
-    "day09_06_2020": {
-      "weekday": "Tuesday"
-    },
-    "day10_06_2020": {
-      "weekday": "Wednesday"
-    },
-    "day11_06_2020": {
-      "weekday": "Thursday"
-    },
-    "day12_06_2020": {
-      "weekday": "Friday"
-    },
-    "day13_06_2020": {
-      "weekday": "Saturday"
-    },
-    "day14_06_2020": {
-      "weekday": "Sunday"
-    }
+  if(calendar.getSchedule() !== undefined) {
+    calendar.import(calendar.getSchedule())
   }
-  calendar.init(days);
-});
+})
 
 var calendar = (function() {
+  
+  var currentSchedule;
 
   function intToColor(str) {
     var binstr = "00" + (str >>> 0).toString(2);
@@ -81,14 +41,17 @@ var calendar = (function() {
   }
 
   var importSchedule = function(schedule) {
+    currentSchedule = schedule;
     initialize(schedule);
     for (day in schedule) {
       intervalList = schedule[day]["intervals"];
-      for (var i = 0; i < intervalList.length; i++) {
-        var interval = intervalList[i];
-        var from = interval["from"];
-        var to = interval["to"];
-        addInterval([from, to], day, schedule[day]["weekday"]);
+      if(intervalList !== undefined) {
+        for (var i = 0; i < intervalList.length; i++) {
+          var interval = intervalList[i];
+          var from = interval["from"];
+          var to = interval["to"];
+          addInterval([from, to], day, schedule[day]["weekday"]);
+        }  
       }
     }
   }
@@ -139,6 +102,9 @@ var calendar = (function() {
   return {
     init: initialize,
     add: addInterval,
-    import: importSchedule
+    import: importSchedule,
+    getSchedule: function() {
+      return currentSchedule;
+    }
   }
 }());

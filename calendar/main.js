@@ -52,6 +52,7 @@ function createWindow() {
   });
   Menu.setApplicationMenu(Menu.buildFromTemplate(menu));
   win.loadFile('index.html')
+  openFile("DefaultSchedule.json");
 }
 
 app.whenReady().then(createWindow)
