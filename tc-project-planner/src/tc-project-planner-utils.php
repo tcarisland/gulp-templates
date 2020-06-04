@@ -74,7 +74,10 @@ function tc_plugin_admin_ajax_switch_view() {
       include "admin-add-project.php";
       break;
     case "listTasks":
-      echo "List Tasks selected";
+      if( isset($_POST['projectID']) ) {
+        $projectID = $_POST['projectID'];        
+      }
+      include "tasks/task-list.php";
       break;
     case "listCategories":
       echo "List Categories Selected";

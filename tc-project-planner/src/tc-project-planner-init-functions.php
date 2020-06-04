@@ -1,7 +1,7 @@
 <?php
 
 function tc_plugin_setup_menu() {
-  $page_title = 'TC Project Planner';
+  $page_title = 'Projects';
   $menu_title = $page_title;
   $capability = 'manage_options';
   $menu_slug  = 'tc-project-planner';
@@ -10,18 +10,43 @@ function tc_plugin_setup_menu() {
 }
 
 function tc_plugin_activation() {
+  ini_set('display_startup_errors', 1);
+  ini_set('display_errors', 1);
+  error_reporting(-1);
+  init_tables();
+}
+
+function init_tables() {
   global $wpdb;
-  $table_name = $wpdb->prefix . "tc_project_planner_projects";
+  
+  $project_table_name = $wpdb->prefix . "tc_project_planner_projects";
+  $project_foreign_key_name = $wpdb->prefix . "tc_project_planner_projects(id)";
+  $task_table_name = $wpdb->prefix . "tc_project_planner_tasks";
+
   $charset_collate = $wpdb->get_charset_collate();
-  $sql = "CREATE TABLE IF NOT EXISTS $table_name (
+  
+  $sqlProjects = "CREATE TABLE IF NOT EXISTS $project_table_name (
           id mediumint(9) NOT NULL AUTO_INCREMENT,
           name varchar(128) NOT NULL,
           description text,
           created_date datetime DEFAULT NOW(),
           PRIMARY KEY (id)
   ) $charset_collate;";
+  
+  $sqlTasks = "CREATE TABLE IF NOT EXISTS $task_table_name (
+          id mediumint(9) NOT NULL AUTO_INCREMENT,
+          name varchar(128) NOT NULL,
+          description text,
+          created_date datetime DEFAULT NOW(),
+          project_id mediumint(9),
+          PRIMARY KEY (id),
+          CONSTRAINT `fk_wp_tc_project_planner_projects_id`
+        		FOREIGN KEY (project_id) REFERENCES $project_foreign_key_name
+  ) $charset_collate;";
+
   require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-  dbDelta($sql);
+  dbDelta($sqlProjects);
+  dbDelta($sqlTasks);
   set_transient( 'tc-project-planner-notice', $wpdb->get_results(), 5 );
 }
 

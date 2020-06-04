@@ -11,9 +11,7 @@ function tcSayHello() {
 			'projectName': projectName,
       'projectDescription' : projectDescription
 		};
-		jQuery.post(ajaxurl, data, function(response) {
-			console.log('Got this from the server: ' + response);
-		});
+		jQuery.post(ajaxurl, data, function(response) {});
 }
 
 function toggleAccordion(item) {
@@ -38,8 +36,6 @@ function switchView(viewname) {
 }
 
 function displayAdminContent(content) {
-  console.log("displayAdminContent called ")
-  console.log(content);
   jQuery("#adminContent").html(content);
 }
 
@@ -61,4 +57,24 @@ function addProject() {
 function listCategories() {
   console.log("List Categories clicked");
   switchView('listCategories');
+}
+
+function removeProject(id) {
+    console.log("removeProject ID : " + id);
+}
+
+function updateProject(id) {
+    console.log("updateProject ID : " + id);
+}
+
+function viewProjectTasks(id) {
+    console.log("viewProjectTasks ID : " + id);
+    var data = {
+      'action': 'switch_admin_view',
+      'view': 'listTasks',
+      'projectID' : "" + id
+    }
+    jQuery.post(ajaxurl, data, function(response) {
+      displayAdminContent(response);
+    });
 }

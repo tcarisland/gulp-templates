@@ -21,9 +21,9 @@
       echo ucfirst(str_replace("_", " ", $key));
       echo "</td><td>";
       if($key == "description") {
-        echo "<textarea style='width: 100%;' rows='10'>" . $value . "</textarea>";        
-      } elseif($key != "id" && $key != "created_date") {
-        echo "<input style='width: 100%;' value='" . $value . "'>";
+        echo "<textarea id='projectDescription" . $row->id . "' style='width: 100%;' rows='10'>" . $value . "</textarea>";        
+      } elseif($key == "id") {
+        echo "<input id='projectID" . $row->id . "' style='width: 100%;' value='" . $value . "'>";
       } else {
         echo $value;
       }
@@ -32,8 +32,8 @@
     ?>
   </table>
   <div class="<?php echo $bgclass; ?>" style="padding: 5px; display: flex; flex-direction: row; justify-content: flex-end;">
-    <button style="padding: 5px;">View Tasks</button>
-    <button style="padding: 5px; margin-left: 10px;">Update</button>
-    <button style="padding: 5px; margin-left: 10px;">Remove</button>
+    <button onclick="viewProjectTasks(<?php echo $row->id?>)" style="padding: 5px;">View Tasks</button>
+    <button onclick="updateProject(<?php echo $row->id?>)" style="padding: 5px; margin-left: 10px;">Update</button>
+    <button onclick="removeProject(<?php echo $row->id?>)" style="padding: 5px; margin-left: 10px;">Remove</button>
   </div>
 </div>
