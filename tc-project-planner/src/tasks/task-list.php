@@ -1,8 +1,8 @@
-<?php 
+<?php
 if(isset($projectID)) {
-  echo "List Tasks selected " . $projectID;  
+  echo "List Tasks selected " . $projectID;
 } else {
-  echo "List Tasks selected - No Project Selected";  
+  echo "List Tasks selected - No Project Selected";
 }
 
 global $wpdb;
@@ -23,6 +23,13 @@ $sqlTasks = "CREATE TABLE IF NOT EXISTS $task_table_name (
         FOREIGN KEY (project_id) REFERENCES $project_foreign_key_name
 ) $charset_collate;";
 
-echo "<br><br>SQL TASKS : " . $sqlTasks;
-
 ?>
+
+<br>
+<div class="tcLowerNavigationWrapper">
+  <div>
+    Add Task
+  </div>
+</div>
+<br>
+<button style="" onclick="alert('hello')">Add Task</button>
