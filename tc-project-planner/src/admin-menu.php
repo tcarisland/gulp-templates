@@ -1,7 +1,6 @@
 <div class="tcProjectPlannerWrapper">
 
   <div class="tcNavigationWrapper">
-  <ul class="tcHorizontalUnorderedList">
     <?php
        $navbar = array(
          "Projects" => "listProjects()",
@@ -10,10 +9,9 @@
          "Categories" => "listCategories()",
        );
        foreach($navbar as $buttonName => $buttonFunction) {
-         echo "<li class='tcHorizontalList' onclick=" . $buttonFunction . ">" . $buttonName ."</li> ";
+         echo "<div class='tcHorizontalList' onclick=" . $buttonFunction . ">" . $buttonName ."</div> ";
        }
     ?>
-  </ul>
   </div>
   <?php
     require_once('tc-project-planner-utils.php');
