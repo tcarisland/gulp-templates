@@ -20,7 +20,7 @@ function tc_plugin_admin_notice(){
     }
 }
 
-function tc_plugin_admin_ajax_request() {
+function tc_plugin_add_project() {
   $projectName = $_POST['projectName'];
   $projectDescription = $_POST['projectDescription'];
   global $wpdb;
@@ -35,6 +35,21 @@ function tc_plugin_admin_ajax_request() {
   echo $wpdb->get_results();
 	wp_die();
 }
+
+function tc_plugin_remove_project() {
+  $projectId = $_POST['projectId'];
+  global $wpdb;
+  $table_name = $wpdb->prefix . 'tc_project_planner_projects';
+  $wpdb->delete(
+    $table_name,
+    array(
+      'id' => $projectId
+    )
+  );
+  echo $wpdb->get_results();
+	wp_die();
+}
+
 
 function list_and_render_projects() {
     $results = list_projects_db_query();
@@ -56,16 +71,13 @@ function list_projects_db_query() {
 
 function render_column_name($column) {
   if(strpos($column, "_") !== false) {
-    $column = str_replace("_", " ", $column);    
+    $column = str_replace("_", " ", $column);
   }
   $column = ucfirst($column);
   return "<b> " . $column . "</b>";
 }
 
 function tc_plugin_admin_ajax_switch_view() {
-  ini_set('display_errors', 1);
-  ini_set('display_startup_errors', 1);
-  error_reporting(E_ALL);
   switch($_POST['view']) {
     case "listProjects":
       include "project/project-list.php";
@@ -75,7 +87,7 @@ function tc_plugin_admin_ajax_switch_view() {
       break;
     case "listTasks":
       if( isset($_POST['projectID']) ) {
-        $projectID = $_POST['projectID'];        
+        $projectID = $_POST['projectID'];
       }
       include "tasks/task-list.php";
       break;
@@ -84,7 +96,7 @@ function tc_plugin_admin_ajax_switch_view() {
       break;
     default:
       echo "Error - Invalid View";
-      break;    
+      break;
   }
   wp_die();
 }

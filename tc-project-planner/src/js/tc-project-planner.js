@@ -2,16 +2,43 @@
   TC Project Planner
 */
 
-function tcSayHello() {
-    console.log("tcSayHello called");
+function newProjectButtonClicked() {
+  jQuery('#tcProjectPlannerOverlayBackground').css('display', 'block');
+  jQuery('#tcProjectPlannerOverlayDialog').css('display', 'block');
+  switchDialogView("addProject");
+}
+
+function createNewProjectButtonClicked() {
+  jQuery('#tcProjectPlannerOverlayBackground').css('display', 'none');
+  jQuery('#tcProjectPlannerOverlayDialog').css('display', 'none');
+}
+
+function addProjectEntry() {
     var projectName = jQuery("#projectNameTextField").val();
     var projectDescription = jQuery("#projectDescriptionTextField").val();
+    console.log("Add Project called " + projectName + " - " + projectDescription);
     var data = {
 			'action': 'add_project',
 			'projectName': projectName,
       'projectDescription' : projectDescription
 		};
-		jQuery.post(ajaxurl, data, function(response) {});
+		jQuery.post(ajaxurl, data, function(response) {
+      createNewProjectButtonClicked();
+      listProjects();
+      console.log("RESPONSE : " + response);
+    });
+}
+
+function removeProjectEntry(projectId) {
+    console.log("Remove Project called " + projectId);
+    var data = {
+			'action': 'remove_project',
+			'projectId': projectId
+		};
+		jQuery.post(ajaxurl, data, function(response) {
+      console.log("RESPONSE : " + response);
+      listProjects();
+    });
 }
 
 function toggleAccordion(item) {
@@ -20,9 +47,10 @@ function toggleAccordion(item) {
     console.log("toggleAccordion IF");
     panel.style.maxHeight = null;
   } else {
-    panel.style.border = "1px solid #303030";
+    panel.style.borderRight = "1px solid #303030";
+    panel.style.borderLeft = "1px solid #303030";
     panel.style.maxHeight = panel.scrollHeight + "px";
-  } 
+  }
 }
 
 function switchView(viewname) {
@@ -32,6 +60,16 @@ function switchView(viewname) {
   }
   jQuery.post(ajaxurl, data, function(response) {
     displayAdminContent(response);
+  });
+}
+
+function switchDialogView(viewname) {
+  var data = {
+    'action': 'switch_admin_view',
+    'view': viewname
+  }
+  jQuery.post(ajaxurl, data, function(response) {
+    jQuery("#tcProjectPlannerOverlayDialog").html(response);
   });
 }
 
@@ -51,7 +89,7 @@ function listTasks() {
 
 function addProject() {
   console.log("Add Project clicked");
-  switchView('addProject');  
+  switchView('addProject');
 }
 
 function listCategories() {

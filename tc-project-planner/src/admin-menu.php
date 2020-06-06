@@ -4,7 +4,6 @@
     <?php
        $navbar = array(
          "Projects" => "listProjects()",
-         "Add Project" => "addProject()",
          "Tasks" => "listTasks()",
          "Categories" => "listCategories()",
        );
@@ -19,5 +18,10 @@
     tc_plugin_deps();
    ?>
    <div id="adminContent">
+   </div>
+   <div id="tcProjectPlannerOverlayBackground">
+     <div id="tcProjectPlannerOverlayDialog">
+       <button onclick="createNewProjectButtonClicked()">Add Project</button>
+     </div>
    </div>
 </div>

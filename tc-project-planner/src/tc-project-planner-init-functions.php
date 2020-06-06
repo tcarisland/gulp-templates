@@ -10,21 +10,18 @@ function tc_plugin_setup_menu() {
 }
 
 function tc_plugin_activation() {
-  ini_set('display_startup_errors', 1);
-  ini_set('display_errors', 1);
-  error_reporting(-1);
   init_tables();
 }
 
 function init_tables() {
   global $wpdb;
-  
+
   $project_table_name = $wpdb->prefix . "tc_project_planner_projects";
   $project_foreign_key_name = $wpdb->prefix . "tc_project_planner_projects(id)";
   $task_table_name = $wpdb->prefix . "tc_project_planner_tasks";
 
   $charset_collate = $wpdb->get_charset_collate();
-  
+
   $sqlProjects = "CREATE TABLE IF NOT EXISTS $project_table_name (
           id mediumint(9) NOT NULL AUTO_INCREMENT,
           name varchar(128) NOT NULL,
@@ -32,7 +29,7 @@ function init_tables() {
           created_date datetime DEFAULT NOW(),
           PRIMARY KEY (id)
   ) $charset_collate;";
-  
+
   $sqlTasks = "CREATE TABLE IF NOT EXISTS $task_table_name (
           id mediumint(9) NOT NULL AUTO_INCREMENT,
           name varchar(128) NOT NULL,
