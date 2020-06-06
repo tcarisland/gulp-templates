@@ -8,7 +8,7 @@
          "Tasks" => "listTasks()",
          "Categories" => "listCategories()",
        );
-       $gridColumn = 0;
+       $gridColumn = 1;
        foreach($navbar as $buttonName => $buttonFunction) {
          echo "<div style='grid-column: " . ($gridColumn++) . ";' class='tcHorizontalListItem' onclick=" . $buttonFunction . ">" . $buttonName ."</div> ";
        }
