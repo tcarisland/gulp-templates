@@ -1,3 +1,4 @@
+<br>
 <?php 
   $query_results = list_projects_db_query();
   $row_index = 0;

@@ -8,8 +8,9 @@
          "Tasks" => "listTasks()",
          "Categories" => "listCategories()",
        );
+       $gridColumn = 0;
        foreach($navbar as $buttonName => $buttonFunction) {
-         echo "<div class='tcHorizontalList' onclick=" . $buttonFunction . ">" . $buttonName ."</div> ";
+         echo "<div style='grid-column: " . ($gridColumn++) . ";' class='tcHorizontalListItem' onclick=" . $buttonFunction . ">" . $buttonName ."</div> ";
        }
     ?>
   </div>
@@ -17,7 +18,6 @@
     require_once('tc-project-planner-utils.php');
     tc_plugin_deps();
    ?>
-   <br>
-   <div id="adminContent" style="position: absolute: left: 0px;">
+   <div id="adminContent">
    </div>
 </div>
