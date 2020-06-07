@@ -10,6 +10,6 @@
     ?>
  </div>
  <div class="tcLowerNavigationWrapper">
-   <div class='tcHorizontalListItem' onclick="newProjectButtonClicked();"> New Project </div>
+   <div class='tcHorizontalListItem' onclick="newItemButtonClicked('addProject');"> New Project </div>
  </div>
  </div>

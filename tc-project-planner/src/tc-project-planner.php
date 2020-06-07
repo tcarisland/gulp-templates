@@ -16,6 +16,7 @@ add_action('wp_enqueue_scripts', 'tc_plugin_deps' );
 add_action('admin_notices', 'tc_plugin_admin_notice' );
 
 add_action('wp_ajax_add_project', 'tc_plugin_add_project' );
+add_action('wp_ajax_add_task', 'tc_plugin_add_task' );
 add_action('wp_ajax_remove_project', 'tc_plugin_remove_project');
 add_action('wp_ajax_switch_admin_view', 'tc_plugin_admin_ajax_switch_view' );
 

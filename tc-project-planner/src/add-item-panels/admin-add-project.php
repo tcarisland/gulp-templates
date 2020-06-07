@@ -1,9 +1,7 @@
-<h1> Project Name </h1>
-<br>
+<h2> Project Name </h2>
 <input style="width: 100%;" id="projectNameTextField" placeholder="Project Name"> </input>
 <br>
-<h1> Project Description </h1>
-<br>
+<h2> Project Description </h2>
 <textarea style="width: 100%;" rows="16" id="projectDescriptionTextField" placeholder="Project Description"> </textarea>
 <br>
 <br>

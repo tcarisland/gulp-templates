@@ -2,48 +2,66 @@
   TC Project Planner
 */
 
-function newProjectButtonClicked() {
+function newItemButtonClicked(itemType) {
   jQuery('#tcProjectPlannerOverlayBackground').css('display', 'block');
   jQuery('#tcProjectPlannerOverlayDialog').css('display', 'block');
   jQuery(document).keyup(function(event) {
-    if(event.keyCode === 27) {
+    if (event.keyCode === 27) {
       exitOverlayDialog();
     }
   });
-  switchDialogView("addProject");
+  switchDialogView(itemType);
 }
 
 function exitOverlayDialog() {
   jQuery('#tcProjectPlannerOverlayBackground').css('display', 'none');
   jQuery('#tcProjectPlannerOverlayDialog').css('display', 'none');
+  jQuery('#tcProjectPlannerOverlayDialog').html("");
 }
 
 function addProjectEntry() {
-    var projectName = jQuery("#projectNameTextField").val();
-    var projectDescription = jQuery("#projectDescriptionTextField").val();
-    console.log("Add Project called " + projectName + " - " + projectDescription);
-    var data = {
-			'action': 'add_project',
-			'projectName': projectName,
-      'projectDescription' : projectDescription
-		};
-		jQuery.post(ajaxurl, data, function(response) {
-      exitOverlayDialog();
-      listProjects();
-      console.log("RESPONSE : " + response);
-    });
+  var projectName = jQuery("#projectNameTextField").val();
+  var projectDescription = jQuery("#projectDescriptionTextField").val();
+  console.log("Add Project called " + projectName + " - " + projectDescription);
+  var data = {
+    'action': 'add_project',
+    'projectName': projectName,
+    'projectDescription': projectDescription
+  };
+  jQuery.post(ajaxurl, data, function(response) {
+    exitOverlayDialog();
+    listProjects();
+    console.log("RESPONSE : " + response);
+  });
+}
+
+function addTaskEntry() {
+  var projectId = jQuery("#selectProjectCombobox").val();
+  var taskName = jQuery("#taskNameTextField").val();
+  var taskDescription = jQuery("#taskDescriptionTextField").val();
+  var data = {
+    'action': 'add_task',
+    'projectId': projectId,
+    'taskName': taskName,
+    'taskDescription': taskDescription
+  };
+  jQuery.post(ajaxurl, data, function(response) {
+    exitOverlayDialog();
+    listTasks();
+    console.log("RESPONSE : " + response);
+  });
 }
 
 function removeProjectEntry(projectId) {
-    console.log("Remove Project called " + projectId);
-    var data = {
-			'action': 'remove_project',
-			'projectId': projectId
-		};
-		jQuery.post(ajaxurl, data, function(response) {
-      console.log("RESPONSE : " + response);
-      listProjects();
-    });
+  console.log("Remove Project called " + projectId);
+  var data = {
+    'action': 'remove_project',
+    'projectId': projectId
+  };
+  jQuery.post(ajaxurl, data, function(response) {
+    console.log("RESPONSE : " + response);
+    listProjects();
+  });
 }
 
 function toggleAccordion(item) {
@@ -103,21 +121,21 @@ function listCategories() {
 }
 
 function removeProject(id) {
-    console.log("removeProject ID : " + id);
+  console.log("removeProject ID : " + id);
 }
 
 function updateProject(id) {
-    console.log("updateProject ID : " + id);
+  console.log("updateProject ID : " + id);
 }
 
 function viewProjectTasks(id) {
-    console.log("viewProjectTasks ID : " + id);
-    var data = {
-      'action': 'switch_admin_view',
-      'view': 'listTasks',
-      'projectID' : "" + id
-    }
-    jQuery.post(ajaxurl, data, function(response) {
-      displayAdminContent(response);
-    });
+  console.log("viewProjectTasks ID : " + id);
+  var data = {
+    'action': 'switch_admin_view',
+    'view': 'listTasks',
+    'projectId': "" + id
+  }
+  jQuery.post(ajaxurl, data, function(response) {
+    displayAdminContent(response);
+  });
 }

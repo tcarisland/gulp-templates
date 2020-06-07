@@ -23,7 +23,7 @@
       if($key == "description") {
         echo "<textarea id='projectDescription" . $row->id . "' style='width: 100%;' rows='10'>" . $value . "</textarea>";
       } elseif($key == "name") {
-        echo "<input id='projectID" . $row->id . "' style='width: 100%;' value='" . $value . "'>";
+        echo "<input id='projectName" . $row->id . "' style='width: 100%;' value='" . $value . "'>";
       } else {
         echo $value;
       }

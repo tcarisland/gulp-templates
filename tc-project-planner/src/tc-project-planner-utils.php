@@ -36,6 +36,24 @@ function tc_plugin_add_project() {
 	wp_die();
 }
 
+function tc_plugin_add_task() {
+  $projectId = $_POST['projectId'];
+  $taskName = $_POST['taskName'];
+  $taskDescription = $_POST['taskDescription'];
+  global $wpdb;
+  $table_name = $wpdb->prefix . 'tc_project_planner_tasks';
+  $wpdb->insert(
+    $table_name, 
+    array(
+      'name' => $taskName,
+      'description' => $taskDescription,
+      'project_id' => $projectId
+    )
+  );
+  echo "project_id : " . $projectId . " task name : " . $taskName . " task description : " . $taskDescription . " results: " . $wpdb->get_results();
+  wp_die();
+}
+
 function tc_plugin_remove_project() {
   $projectId = $_POST['projectId'];
   global $wpdb;
@@ -83,11 +101,14 @@ function tc_plugin_admin_ajax_switch_view() {
       include "project/project-list.php";
       break;
     case "addProject":
-      include "admin-add-project.php";
+      include "add-item-panels/admin-add-project.php";
+      break;
+    case "addTask":
+      include "add-item-panels/admin-add-task.php";
       break;
     case "listTasks":
-      if( isset($_POST['projectID']) ) {
-        $projectID = $_POST['projectID'];
+      if( isset($_POST['project_id']) ) {
+        $projectId = $_POST['project_id'];
       }
       include "tasks/task-list.php";
       break;

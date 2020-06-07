@@ -51,8 +51,8 @@ th {
 .tcNavigationWrapper {
   width: 98%;
   display: grid;
-  grid-template-columns: repeat(10, 10%);
-  height: 57px;
+  grid-template-columns: repeat(10, 10%);  
+  height: 60px;
   background-color: #333333;
   color: #F0F0F0;
   justify-content: start;
@@ -70,7 +70,7 @@ th {
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  height: 57px;
+  height: 60px;
   width: 100%;
 }
 
@@ -82,7 +82,9 @@ th {
   border: none;
   color: #F0F0F0;
   cursor: pointer;
-  padding: 18px;
+  height: 60px;
+  padding-left: 16px;
+  padding-right: 16px;
   width: 100%;
   text-align: left;
   outline: none;
