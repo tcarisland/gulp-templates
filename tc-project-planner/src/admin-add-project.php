@@ -6,4 +6,8 @@
 <br>
 <textarea style="width: 100%;" rows="16" id="projectDescriptionTextField" placeholder="Project Description"> </textarea>
 <br>
-<button onclick="addProjectEntry()">Create Project</button>
+<br>
+<div style="float: right;">
+  <button onclick="exitOverlayDialog()">Cancel</button>
+  <button onclick="addProjectEntry()">Create Project</button>
+</div>

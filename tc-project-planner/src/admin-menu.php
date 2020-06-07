@@ -20,8 +20,6 @@
    <div id="adminContent">
    </div>
    <div id="tcProjectPlannerOverlayBackground">
-     <div id="tcProjectPlannerOverlayDialog">
-       <button onclick="createNewProjectButtonClicked()">Add Project</button>
-     </div>
+     <div id="tcProjectPlannerOverlayDialog"></div>
    </div>
 </div>

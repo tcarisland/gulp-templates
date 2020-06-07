@@ -5,10 +5,15 @@
 function newProjectButtonClicked() {
   jQuery('#tcProjectPlannerOverlayBackground').css('display', 'block');
   jQuery('#tcProjectPlannerOverlayDialog').css('display', 'block');
+  jQuery(document).keyup(function(event) {
+    if(event.keyCode === 27) {
+      exitOverlayDialog();
+    }
+  });
   switchDialogView("addProject");
 }
 
-function createNewProjectButtonClicked() {
+function exitOverlayDialog() {
   jQuery('#tcProjectPlannerOverlayBackground').css('display', 'none');
   jQuery('#tcProjectPlannerOverlayDialog').css('display', 'none');
 }
@@ -23,7 +28,7 @@ function addProjectEntry() {
       'projectDescription' : projectDescription
 		};
 		jQuery.post(ajaxurl, data, function(response) {
-      createNewProjectButtonClicked();
+      exitOverlayDialog();
       listProjects();
       console.log("RESPONSE : " + response);
     });
