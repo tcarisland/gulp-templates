@@ -68,20 +68,25 @@ function tc_plugin_remove_project() {
 	wp_die();
 }
 
-
-function list_and_render_projects() {
-    $results = list_projects_db_query();
-    $data = "";
-    $row_index = 0;
-    foreach($results as $row) {
-      $data .= render_project_entry($row, ++$row_index);
-    }
-    return $data;
+function tc_plugin_remove_task() {
+  $taskId = $_POST['taskId'];
+  global $wpdb;
+  $table_name = $wpdb->prefix . 'tc_project_planner_tasks';
+  $wpdb->delete(
+    $table_name,
+    array(
+      'id' => $taskId
+    )
+  );
+  $wpdb->show_errors();
+  echo $taskId . " - " . $wpdb->get_results() . " - " . $wpdb->show_errors();
+  wp_die();
 }
 
-function list_projects_db_query() {
+function list_items_db_query($type) {
   global $wpdb;
-  $table_name = $wpdb->prefix . "tc_project_planner_projects";
+  $table_name;
+  $table_name = $wpdb->prefix . "tc_project_planner_" . $type;
   $charset_collate = $wpdb->get_charset_collate();
   $sql = "SELECT * FROM $table_name;";
   return $wpdb->get_results($sql);

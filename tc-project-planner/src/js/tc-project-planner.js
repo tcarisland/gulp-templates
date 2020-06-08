@@ -64,6 +64,18 @@ function removeProjectEntry(projectId) {
   });
 }
 
+function removeTaskEntry(taskId) {
+  console.log("Remove Task called " + taskId);
+  var data = {
+    'action': 'remove_task',
+    'taskId': taskId
+  };
+  jQuery.post(ajaxurl, data, function(response) {
+    console.log("RESPONSE : " + response);
+    listTasks();
+  });
+}
+
 function toggleAccordion(item) {
   var panel = document.getElementById(item);
   if (panel.style.maxHeight) {
@@ -126,6 +138,10 @@ function removeProject(id) {
 
 function updateProject(id) {
   console.log("updateProject ID : " + id);
+}
+
+function updateTask(id) {
+  console.log("updateTask ID : " + id);  
 }
 
 function viewProjectTasks(id) {

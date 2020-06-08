@@ -1,7 +1,7 @@
  <div id="taskList">
  <div class="taskListWrapper">
    <?php
-     $query_results = list_projects_db_query();
+     $query_results = list_items_db_query("projects");
      $row_index = 0;
      foreach($query_results as $row) {
        $row_index++;
