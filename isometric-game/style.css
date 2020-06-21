@@ -1,0 +1,7 @@
+#isoCanvas {
+  border: 1px solid black;
+  background-color: #DDD;
+  border: 3px solid #989898;
+  border-radius: 50%;
+  padding: 10px;
+}
