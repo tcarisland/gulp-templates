@@ -1,15 +1,9 @@
 import React from 'react';
+import ArrowKeyPress from '../interfaces/ArrowKeyPress';
+import KeyPressEventQueue from '../events/KeyPressEventQueue';
 
 interface ArrowsPreviewProps {
   side: number;
-}
-
-interface ArrowKeyPress {
-  code: number;
-  active: boolean;
-  gridArea: string;
-  id: string;
-  dir: number;
 }
 
 let UP: ArrowKeyPress = { code: 38, dir: 0b1000, active: false, gridArea: "n", id: "upArrowKey" };
@@ -30,14 +24,9 @@ function handleKeyboardEvent(keyPress: ArrowKeyPress, keyDown: boolean) {
   if(keyButton != null) {
     keyButton.style.color = color;
   }
-}
-
-function setKeyPressActive(keyPress: ArrowKeyPress, keyDown: boolean) {
-  keyPress.active = keyDown;  
-}
-
-function dec2bin(dec: number){
-    return (dec >>> 0).toString(2);
+  if(keyDown) {
+    KeyPressEventQueue.getInstance().pushKeyPressEvent(keyPress);
+  }
 }
 
 class ArrowsPreview extends React.Component<ArrowsPreviewProps> {
@@ -56,7 +45,7 @@ class ArrowsPreview extends React.Component<ArrowsPreviewProps> {
             }
         });
         allDirections.forEach(element => {
-          handleKeyboardEvent(element, element.dir === direction)
+          handleKeyboardEvent(element, element.dir === direction);
         });
       }
     };
