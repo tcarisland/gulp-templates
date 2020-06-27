@@ -61,10 +61,10 @@ class ArrowsPreview extends React.Component<ArrowsPreviewProps> {
       
       <div id="spaceKey" className="arrowsKeyPreview" style={Object.assign({ gridArea: "c" })}>&#x025FC;</div>
 
-      <div id="nwArrowKey" className="arrowsKeyPreviewLight" style={Object.assign({ gridArea: "nw" })}>&#x025E4;</div>
-      <div id="neArrowKey" className="arrowsKeyPreviewLight" style={Object.assign({ gridArea: "ne" })}>&#x025E5;</div>
-      <div id="swArrowKey" className="arrowsKeyPreviewLight" style={Object.assign({ gridArea: "sw" })}>&#x025E3;</div>
-      <div id="seArrowKey" className="arrowsKeyPreviewLight" style={Object.assign({ gridArea: "se" })}>&#x025E2;</div>
+      <div id="nwArrowKey" className="arrowsKeyPreview" style={Object.assign({ gridArea: "nw" })}>&#x025E4;</div>
+      <div id="neArrowKey" className="arrowsKeyPreview" style={Object.assign({ gridArea: "ne" })}>&#x025E5;</div>
+      <div id="swArrowKey" className="arrowsKeyPreview" style={Object.assign({ gridArea: "sw" })}>&#x025E3;</div>
+      <div id="seArrowKey" className="arrowsKeyPreview" style={Object.assign({ gridArea: "se" })}>&#x025E2;</div>
 
     </div>);
   }
