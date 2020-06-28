@@ -57,7 +57,8 @@ class ArrowsPreview extends React.Component<ArrowsPreviewProps> {
     document.addEventListener("keyup", keyListener, false);
   }
   render() {
-    return (<div className="arrowsPreview" style={Object.assign({ width: this.props.side + "px" }, { height: this.props.side + "px" })}>
+    const arrowsPreviewStyle = Object.assign({ width: this.props.side + "px" }, { height: this.props.side + "px" });
+    return (<div className="arrowsPreview" style={arrowsPreviewStyle}>
       {
         ArrowKeyButtons.map((element) => React.createElement(ArrowKeyButton, element as ArrowKeyProps, null))
       }
