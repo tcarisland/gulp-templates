@@ -1,9 +1,9 @@
 interface ArrowKeyPress {
-  code: number;
+  code?: number;
+  dir: number;
   active: boolean;
   gridArea: string;
   id: string;
-  dir: number;
 }
 
 export default ArrowKeyPress;
