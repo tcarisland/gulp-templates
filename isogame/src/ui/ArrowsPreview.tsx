@@ -22,20 +22,21 @@ let SPACE: ArrowKeyPress = { code: 32, dir: 0, active: false, id: "spaceKey" };
 const directions = [UP, LEFT, DOWN, RIGHT];
 const allDirections = [UP, LEFT, DOWN, RIGHT, NW, NE, SW, SE];
 
-function handleKeyboardEvent(keyPress: ArrowKeyPress, keyDown: boolean) {
-  let keyButton = document.getElementById(keyPress.id);
-  let color = keyDown ? "red" : "black";
-  if (keyButton != null) {
-    keyButton.style.color = color;
-  }
-  if (keyDown) {
-    KeyPressEventQueue.getInstance().pushKeyPressEvent(keyPress);
-  }
-}
-
 class ArrowsPreview extends React.Component<ArrowsPreviewProps> {
   componentDidMount() {
     const keyListener = function(e: KeyboardEvent) {
+      
+      function handleKeyboardEvent(keyPress: ArrowKeyPress, keyDown: boolean) {
+        let keyButton = document.getElementById(keyPress.id);
+        let color = keyDown ? "red" : "black";
+        if (keyButton != null) {
+          keyButton.style.color = color;
+        }
+        if (keyDown) {
+          KeyPressEventQueue.getInstance().pushKeyPressEvent(keyPress);
+        }
+      }
+      
       if (SPACE.code === e.keyCode) {
         handleKeyboardEvent(SPACE, (e.type === "keydown"));
       } else {

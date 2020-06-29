@@ -1,13 +1,16 @@
 import ArrowKeyPress from '../interfaces/ArrowKeyPress';
+import EventQueueListener from '../interfaces/EventQueueListener';
 
 export default class KeyPressEventQueue {
   
   static handle: KeyPressEventQueue = new KeyPressEventQueue();
   
   private keyPressEvents: ArrowKeyPress[];
+  private listeners: EventQueueListener[];
   
   private constructor() {
     this.keyPressEvents = [];
+    this.listeners = [];
   }
   
   static getInstance() {
@@ -18,9 +21,21 @@ export default class KeyPressEventQueue {
   }
   
   public pushKeyPressEvent(kp: ArrowKeyPress) {
-    console.log("Pushing key press event");
-    console.log(kp);
     this.keyPressEvents.push(kp);
+    this.runListeners();
+  }
+  
+  private runListeners() {
+    this.listeners.forEach(listener => {
+      while(this.keyPressEvents.length > 0) {
+        let event = this.keyPressEvents.pop()!;
+        listener.run(event);
+      }
+    });
+  }
+  
+  public addEventListener(listener: EventQueueListener) {
+    this.listeners.push(listener);
   }
   
 }
