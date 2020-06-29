@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-      <ISOCanvas side={800} canvasRef={React.createRef()} />
+      <ISOCanvas side={500} canvasRef={React.createRef()} />
       <ArrowsPreview side={130}/>
       </header>
     </div>
