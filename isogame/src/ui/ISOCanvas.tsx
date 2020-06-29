@@ -17,7 +17,6 @@ const velocity = 25;
 class ISOCanvas extends React.Component<ISOCanvasProps> {
   
     componentDidMount() {
-      console.log(this.props.canvasRef);
       rects = [];
       const ctx = this.props.canvasRef.current.getContext("2d");      
       ctx.beginPath();
