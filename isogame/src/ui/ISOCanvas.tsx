@@ -2,6 +2,7 @@ import React from 'react';
 import KeyPressEventQueue from '../events/KeyPressEventQueue';
 import ArrowKeyPress from '../interfaces/ArrowKeyPress';
 import ISORectangle from '../interfaces/ISORectangle';
+import ISOGrid from '../model/ISOGrid';
 import KeyPressType from '../enums/KeyPressType';
 
 interface ISOCanvasProps {
@@ -10,9 +11,9 @@ interface ISOCanvasProps {
 }
 
 const zeroPad = (num: number, places: number) => String(num).padStart(places, '0');
-let rect: ISORectangle = { x: 25, y: 25, w: 25, h: 25 }
+let rect: ISORectangle = { x: 10, y: 10, w: 10, h: 10 }
 let rects: ISORectangle[];
-const velocity = 25;
+const velocity = 10;
 
 class ISOCanvas extends React.Component<ISOCanvasProps> {
   
@@ -24,6 +25,8 @@ class ISOCanvas extends React.Component<ISOCanvasProps> {
       ctx.stroke();
       let width = this.props.side;
       let height = this.props.side;
+      let grid: ISOGrid = new ISOGrid(this.props.side, this.props.side, 50, 50);
+      grid.drawISORectangles(ctx);
       let eventHandler = function(keyPress: ArrowKeyPress) {
         switch(keyPress.type) {
           case KeyPressType.ARROW:
@@ -33,15 +36,14 @@ class ISOCanvas extends React.Component<ISOCanvasProps> {
             rect.y = ((rY + rect.h) < (height + velocity) && rY >= 0) ? rY : rect.y;
             rect.x = ((rX + rect.w) < (width + velocity) && rX >= 0) ? rX : rect.x;
             ctx.clearRect(0, 0, width, height);
-            ctx.beginPath();
-            ctx.rect(rect.x, rect.y, rect.w, rect.h);
-            ctx.stroke();
+            grid.drawBox(ctx, rect, "rgba(0, 0, 255, 0.5");
             rects.forEach(r => {
               ctx.beginPath();
               ctx.rect(r.x, r.y, r.w, r.h);
               ctx.fillStyle = "rgba(0, 0, 0, 0.1)"
               ctx.fill();
             });
+            grid.drawISORectangles(ctx);
             break;
           case KeyPressType.SPACE:
             let overlap = false;
@@ -50,9 +52,10 @@ class ISOCanvas extends React.Component<ISOCanvasProps> {
             rects.forEach(r => {
               ctx.beginPath();
               ctx.rect(r.x, r.y, r.w, r.h);
-              ctx.fillStyle = "rgba(0, 0, 0, 0.1)"
+              ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
               ctx.fill();
             });
+            grid.drawISORectangles(ctx);
             break;
         }
       }
