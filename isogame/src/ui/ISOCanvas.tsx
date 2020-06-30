@@ -3,6 +3,7 @@ import KeyPressEventQueue from '../events/KeyPressEventQueue';
 import ArrowKeyPress from '../interfaces/ArrowKeyPress';
 import ISORectangle from '../interfaces/ISORectangle';
 import ISOGrid from '../model/ISOGrid';
+import ISOGridConfig from '../interfaces/ISOGridConfig';
 import KeyPressType from '../enums/KeyPressType';
 
 interface ISOCanvasProps {
@@ -25,7 +26,7 @@ class ISOCanvas extends React.Component<ISOCanvasProps> {
       ctx.stroke();
       let width = this.props.side;
       let height = this.props.side;
-      let grid: ISOGrid = new ISOGrid(this.props.side, this.props.side, 50, 50);
+      let grid: ISOGrid = new ISOGrid({width: width, height: height, rows: 11, columns: 11});
       grid.drawISORectangles(ctx);
       let eventHandler = function(keyPress: ArrowKeyPress) {
         switch(keyPress.type) {

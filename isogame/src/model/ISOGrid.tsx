@@ -1,41 +1,35 @@
 import ISORectangle from '../interfaces/ISORectangle';
+import ISOGridConfig from '../interfaces/ISOGridConfig';
 
 export default class ISOGrid {
 
-    private width: number;
-    private height: number;
-    private rows: number;
-    private columns: number;
+    private gridConfig: ISOGridConfig;
 
-    constructor(width: number, height: number, rows: number, columns: number) {
-        this.width = width;
-        this.height = height;
-        this.rows = rows;
-        this.columns = columns;
-    }
+    constructor(gridConfig: ISOGridConfig) {
+        this.gridConfig = gridConfig;    }
 
     isoX(xc: number, yc: number) {
-        return ((xc - yc) / 2) + (this.width / 2);
+        return ((xc - yc) / 2) + (this.gridConfig.width / 2);
     };
     isoY(xc: number, yc: number) {
-        return ((xc + yc) / 4) + (this.height / 4);
+        return ((xc + yc) / 4) + (this.gridConfig.height / 4);
     }
 
     getBoxWidth() : number {
-        return (this.width / this.columns);
+        return (this.gridConfig.width / this.gridConfig.columns);
     }
 
     getBoxHeight() : number {
-        return (this.height / this.rows);
+        return (this.gridConfig.height / this.gridConfig.rows);
     }
 
     getISORectangles() : ISORectangle[][] {
         let rectangles : ISORectangle[][] = [];
         const boxW = this.getBoxWidth();
         const boxH = this.getBoxHeight();
-        for(let _r = 0; _r < this.rows; _r++) {
+        for(let _r = 0; _r < this.gridConfig.rows; _r++) {
             rectangles[_r] = [];
-            for(let _c = 0; _c < this.columns; _c++) {
+            for(let _c = 0; _c < this.gridConfig.columns; _c++) {
                 rectangles[_r][_c] = {w: boxW, h: boxH, x: boxW * _c, y: boxH * _r};
             }
         }
