@@ -9,10 +9,10 @@ export default class ISOGrid {
         this.gridConfig = gridConfig;    }
 
     isoX(xc: number, yc: number) {
-        return ((xc - yc) / 2) + (this.gridConfig.width / 2);
+        return ((xc - yc) / 1) + (this.gridConfig.width / 2);
     };
     isoY(xc: number, yc: number) {
-        return ((xc + yc) / 4) + (this.gridConfig.height / 4);
+        return ((xc + yc) / 2);
     }
 
     getBoxWidth() : number {

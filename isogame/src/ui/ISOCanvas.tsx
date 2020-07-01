@@ -26,7 +26,7 @@ class ISOCanvas extends React.Component<ISOCanvasProps> {
       ctx.stroke();
       let width = this.props.side;
       let height = this.props.side;
-      let grid: ISOGrid = new ISOGrid({width: width, height: height, rows: 11, columns: 11});
+      let grid: ISOGrid = new ISOGrid({width: width, height: height, rows: 20, columns: 20});
       grid.drawISORectangles(ctx);
       let eventHandler = function(keyPress: ArrowKeyPress) {
         switch(keyPress.type) {
@@ -39,10 +39,7 @@ class ISOCanvas extends React.Component<ISOCanvasProps> {
             ctx.clearRect(0, 0, width, height);
             grid.drawBox(ctx, rect, "rgba(0, 0, 255, 0.5");
             rects.forEach(r => {
-              ctx.beginPath();
-              ctx.rect(r.x, r.y, r.w, r.h);
-              ctx.fillStyle = "rgba(0, 0, 0, 0.1)"
-              ctx.fill();
+              grid.drawBox(ctx, r, "rgba(0, 0, 0, 1");
             });
             grid.drawISORectangles(ctx);
             break;
@@ -51,10 +48,7 @@ class ISOCanvas extends React.Component<ISOCanvasProps> {
             rects.push(Object.assign({}, rect));
             ctx.clearRect(0, 0, width, height);
             rects.forEach(r => {
-              ctx.beginPath();
-              ctx.rect(r.x, r.y, r.w, r.h);
-              ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
-              ctx.fill();
+              grid.drawBox(ctx, r, "rgba(0, 0, 0, 1");
             });
             grid.drawISORectangles(ctx);
             break;
