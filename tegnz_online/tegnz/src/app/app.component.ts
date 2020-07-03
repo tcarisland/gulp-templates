@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TopnavbarComponent } from './topnavbar/topnavbar.component';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  title = 'tegnz';
+  title = 'Tegn Z Vectors and Fonts made easy';
+  navbar = new TopnavbarComponent();
 }
