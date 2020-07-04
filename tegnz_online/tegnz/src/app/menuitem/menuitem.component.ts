@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, HostListener } from '@angular/core';
+import opentype from 'opentype.js';
 
 @Component({
   selector: 'app-menuitem',
@@ -11,19 +12,28 @@ export class MenuitemComponent implements OnInit {
   @Input() item: string;
   menuItemId: string;
 
-  @HostListener('change', ['$event'])
-  onFileSelected(event: any) {
-    console.log(event);
-    const reader = new FileReader();
-    reader.onload = e => {
-      console.log(e);
-      console.log(e.target.result);
-    }
-    reader.readAsText(event.target.files[0]);
+  onFontLoaded(font: any) {
+
   }
 
-  readFile(contents: string) {
-
+  @HostListener('change', ['$event'])
+  onFileSelected(event: any) {
+    //document.getElementById('font-name').innerHTML = '';
+    var file = event.target.files[0];
+    var reader = new FileReader();
+    var font: any;
+    reader.onload = function(e) {
+      try {
+        font = opentype.parse(e.target.result);
+        console.log(font);
+      } catch (err) {
+        console.error(err.toString());
+      }
+    };
+    reader.onerror = function(err) {
+      console.error(err.toString());
+    };
+    reader.readAsArrayBuffer(file);
   }
 
   constructor() {
