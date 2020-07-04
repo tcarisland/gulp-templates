@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuitemComponent } from '../menuitem/menuitem.component';
 import TopnavbarEntry from './topnavbar.entry';
 
 @Component({

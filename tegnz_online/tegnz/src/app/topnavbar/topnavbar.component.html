@@ -1,7 +1,7 @@
 <div class="topnavbar">
 
     <div *ngFor="let item of menuItems">
-        <div class="topnavbarEntry" onclick='alert("Hello")'> {{item}} </div>
+        <app-menuitem item={{item}}></app-menuitem>
     </div>
 
 </div>
