@@ -9,8 +9,11 @@ export class MenuitemComponent implements OnInit {
 
   static counter = 0;
   @Input() item: string;
+  menuItemId: string;
 
-  constructor() { }
+  constructor() {
+    this.menuItemId = "menuItem" + (MenuitemComponent.counter++);
+  }
 
   ngOnInit(): void {
   }
