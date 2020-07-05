@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TegnzMainComponent } from './tegnz-main/tegnz-main.component';
 import { OpenFontMenuItemComponent } from './open-font-menu-item/open-font-menu-item.component';
+import { GlyphListComponent } from './glyph-list/glyph-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TegnzMainComponent,
-    OpenFontMenuItemComponent
+    OpenFontMenuItemComponent,
+    GlyphListComponent
   ],
   imports: [
     BrowserModule,
