@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TopnavbarComponent } from './topnavbar.component';
+import { OpenFontMenuItemComponent } from './open-font-menu-item.component';
 
-describe('TopnavbarComponent', () => {
-  let component: TopnavbarComponent;
-  let fixture: ComponentFixture<TopnavbarComponent>;
+describe('OpenFontMenuItemComponent', () => {
+  let component: OpenFontMenuItemComponent;
+  let fixture: ComponentFixture<OpenFontMenuItemComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TopnavbarComponent ]
+      declarations: [ OpenFontMenuItemComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TopnavbarComponent);
+    fixture = TestBed.createComponent(OpenFontMenuItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

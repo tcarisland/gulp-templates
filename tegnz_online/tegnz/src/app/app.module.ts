@@ -3,14 +3,14 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TopnavbarComponent } from './topnavbar/topnavbar.component';
-import { MenuitemComponent } from './menuitem/menuitem.component';
+import { TegnzMainComponent } from './tegnz-main/tegnz-main.component';
+import { OpenFontMenuItemComponent } from './open-font-menu-item/open-font-menu-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TopnavbarComponent,
-    MenuitemComponent
+    TegnzMainComponent,
+    OpenFontMenuItemComponent
   ],
   imports: [
     BrowserModule,

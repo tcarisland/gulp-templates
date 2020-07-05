@@ -1,31 +1,29 @@
-import { Component, OnInit, Input, HostListener } from '@angular/core';
-import opentype from 'opentype.js';
+import { Component, OnInit, Input, Output, HostListener, EventEmitter } from '@angular/core';
+import * as opentype from 'opentype.js';
+import { Font } from 'opentype.js';
 
 @Component({
-  selector: 'app-menuitem',
-  templateUrl: './menuitem.component.html',
-  styleUrls: ['./menuitem.component.sass']
+  selector: 'app-open-font-menu-item',
+  templateUrl: './open-font-menu-item.component.html',
+  styleUrls: ['./open-font-menu-item.component.sass']
 })
-export class MenuitemComponent implements OnInit {
+export class OpenFontMenuItemComponent implements OnInit {
 
   static counter = 0;
   @Input() item: string;
+  @Output() fontLoaded = new EventEmitter<Font>();
   menuItemId: string;
-
-  onFontLoaded(font: any) {
-
-  }
 
   @HostListener('change', ['$event'])
   onFileSelected(event: any) {
-    //document.getElementById('font-name').innerHTML = '';
     var file = event.target.files[0];
     var reader = new FileReader();
     var font: any;
+    var currentInstance = this;
     reader.onload = function(e) {
       try {
         font = opentype.parse(e.target.result);
-        console.log(font);
+        currentInstance.fontLoaded.emit(font);
       } catch (err) {
         console.error(err.toString());
       }
@@ -37,7 +35,7 @@ export class MenuitemComponent implements OnInit {
   }
 
   constructor() {
-    this.menuItemId = "menuItem" + (MenuitemComponent.counter++);
+    this.menuItemId = "openFontMenuItem" + (OpenFontMenuItemComponent.counter++);
   }
 
   ngOnInit(): void {

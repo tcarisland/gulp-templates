@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MenuitemComponent } from './menuitem.component';
+import { TegnzMainComponent } from './tegnz-main.component';
 
-describe('MenuitemComponent', () => {
-  let component: MenuitemComponent;
-  let fixture: ComponentFixture<MenuitemComponent>;
+describe('TegnzMainComponent', () => {
+  let component: TegnzMainComponent;
+  let fixture: ComponentFixture<TegnzMainComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MenuitemComponent ]
+      declarations: [ TegnzMainComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MenuitemComponent);
+    fixture = TestBed.createComponent(TegnzMainComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
