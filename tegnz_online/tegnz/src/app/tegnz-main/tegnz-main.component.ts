@@ -8,13 +8,10 @@ import { Font } from 'opentype.js';
 })
 export class TegnzMainComponent implements OnInit {
 
+  font: Font;
+
   constructor() { }
-
-  onFontLoaded(font: Font) {
-    console.log("onFontLoaded called");
-    console.log(font);
-  }
-
+  
   ngOnInit(): void {
   }
 

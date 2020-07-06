@@ -1,4 +1,4 @@
 <div class="topnavbar">
-    <app-open-font-menu-item (fontLoaded)="onFontLoaded($event)" ></app-open-font-menu-item>
+    <app-open-font-menu-item (fontLoaded)="glyphList.onFontLoaded($event)" ></app-open-font-menu-item>
 </div>
-<app-glyph-list></app-glyph-list>
+<app-glyph-list #glyphList></app-glyph-list>

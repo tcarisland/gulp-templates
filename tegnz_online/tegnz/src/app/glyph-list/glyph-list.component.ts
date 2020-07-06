@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Font } from 'opentype.js';
 
 @Component({
   selector: 'app-glyph-list',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GlyphListComponent implements OnInit {
 
+  font: Font;
   glyphs: string[];
 
   constructor() {
@@ -14,6 +16,13 @@ export class GlyphListComponent implements OnInit {
       "A",
       "B"
     ];
+    this.font = null;
+  }
+
+  onFontLoaded(font: Font) {
+    console.log("onFontLoaded " + this.constructor.name);
+    console.log(font);
+    this.font = font;
   }
 
   ngOnInit(): void {
