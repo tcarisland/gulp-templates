@@ -7,7 +7,6 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Hello, Thor!</h1>
         <ISOCanvas side={500} rows={20} columns={20} canvasRef={createRef()} />
       </header>
     </div>
