@@ -10,6 +10,8 @@ class ISOCanvas extends React.Component<ISOCanvasProps> {
         let boxWidth = this.props.side / this.props.columns;
         let boxHeight = this.props.side / this.props.rows;
         let grid = new ISOGrid(new ISOGridConfig(this.props.rows, this.props.columns, this.props.side, this.props.side));
+        let ctx = this.props.canvasRef.current.getContext("2d");
+        grid.drawGrid(ctx);
     }
     render() {
         return(
