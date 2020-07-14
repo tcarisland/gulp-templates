@@ -1,4 +1,4 @@
-import ISOCanvasConfig from '../model/ISOCanvasConfig';
+import ISOGridConfig from '../model/ISOGridConfig';
 
 interface ISOCanvasProps {
     side: number,
