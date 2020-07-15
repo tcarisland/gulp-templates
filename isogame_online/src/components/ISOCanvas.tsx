@@ -15,8 +15,7 @@ class ISOCanvas extends React.Component<ISOCanvasProps> {
     }
     render() {
         return(
-            <div> ISO Canvas
-                <br></br>
+            <div>
                 <canvas 
                     ref= { this.props.canvasRef }
                     width=  { this.props.side }
