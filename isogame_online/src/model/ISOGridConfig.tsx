@@ -12,4 +12,12 @@ export default class ISOGridConfig {
         this.height = height;
     }
 
+    public getTileWidth(): number {
+        return this.width / this.columns;
+    }
+
+    public getTileHeight(): number {
+        return this.height / this.rows;
+    }
+
 }

@@ -1,3 +1,5 @@
+import ISOGridConfig from "../model/ISOGridConfig";
+
 export interface ISOTileVertex {
     x: number,
     y: number
@@ -19,7 +21,17 @@ export default class ISOTile {
         this.column = column;
     }
 
-    public create2DVertices(tileWidth: number, tileHeight: number): ISOTileVertices {
+    public getColor(): string {
+        if((this.row % 2 === 0 && this.column % 2 === 0) || (this.row % 2 === 1 && this.column % 2 === 1)) {
+            return "rgba(0, 255, 0, 0.3)";
+        } else {
+            return "rgba(0, 0, 255, 0.5)";
+        }
+    }
+
+    public create2DVertices(gridConfig: ISOGridConfig): ISOTileVertices {
+        let tileWidth = gridConfig.getTileWidth();
+        let tileHeight = gridConfig.getTileHeight();
         return {
             nw : {x: this.column * tileWidth, y: this.row * tileHeight},
             ne: {x: (this.column * tileWidth) + tileWidth, y: this.row * tileHeight},
@@ -28,7 +40,14 @@ export default class ISOTile {
         }
     }
 
-    public render2D(ctx: CanvasRenderingContext2D, tileWidth: number, tileHeight: number) {
+    public render2D(ctx: CanvasRenderingContext2D, gridConfig: ISOGridConfig) {
         ctx.beginPath();
+        let v = this.create2DVertices(gridConfig);
+        ctx.moveTo(v.nw.x, v.nw.y);
+        ctx.lineTo(v.ne.x, v.ne.y);
+        ctx.lineTo(v.se.x, v.se.y);
+        //ctx.lineTo(v.sw.x, v.sw.y);
+        ctx.fillStyle = this.getColor();
+        ctx.fill();
     }
 }
