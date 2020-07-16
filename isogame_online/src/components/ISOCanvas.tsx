@@ -48,6 +48,7 @@ class ISOCanvas extends React.Component<ISOCanvasProps> {
                 grid.active = active;
                 ctx.clearRect(0, 0, width, height);
                 grid.drawGrid(ctx);
+                active.renderEnclosingBox(ctx, grid.config);
             }
         });
     }

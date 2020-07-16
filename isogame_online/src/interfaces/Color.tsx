@@ -4,7 +4,7 @@ export default class Color {
     b: number;
     alpha: number;
     public static BLACK = new Color(0, 0, 0, 1);
-    public static WHITE = new Color(255, 255, 255, 1);
+    public static WHITE = new Color(250, 250, 250, 1);
 
     constructor(r: number, g: number, b: number, alpha?: number) {
         this.r = r;

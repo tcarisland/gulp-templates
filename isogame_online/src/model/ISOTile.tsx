@@ -11,12 +11,16 @@ export class ISOTileVertices {
     ne: ISOTileVertex;
     se: ISOTileVertex;
     sw: ISOTileVertex;
+    tileWidth: number;
+    tileHeight: number;
 
     constructor(row: number, column: number, tileWidth: number, tileHeight: number) {
         this.nw = {x: column * tileWidth, y: row * tileHeight};
         this.ne = {x: (column * tileWidth) + tileWidth, y: row * tileHeight};
         this.se = {x: (column * tileWidth) + tileWidth, y: (row * tileHeight) + tileHeight};
         this.sw = {x: column * tileWidth, y: (row * tileHeight) + tileHeight};
+        this.tileWidth = tileWidth;
+        this.tileHeight = tileHeight;
     }
 
     public getVertices(): ISOTileVertex[] {
@@ -37,6 +41,19 @@ export class ISOTileVertices {
     };
     private isoY(xc: number, yc: number) {
         return (xc + yc) / 2;
+    }
+
+    public getEnclosingBox(): ISOTileVertex[] {
+        let minX = this.isoX(this.sw.x, this.sw.y);
+        let minY = this.isoY(this.nw.x, this.nw.y);
+        let maxX = this.isoX(this.ne.x, this.ne.y);
+        let maxY = this.isoY(this.se.x, this.se.y);
+        return [
+            {x: minX, y: minY},
+            {x: maxX, y: minY},
+            {x: maxX, y: maxY},
+            {x: minX, y: maxY}    
+        ]
     }
 }
 
@@ -79,6 +96,26 @@ export default class ISOTile {
         }
         ctx.fillStyle = color.getRgbaString();
         ctx.fill();
+    }
+
+    public renderEnclosingBox(ctx: CanvasRenderingContext2D, gridConfig: ISOGridConfig) {
+        let vertices = this.create2DVertices(gridConfig).getEnclosingBox();
+        console.log(vertices);
+        ctx.beginPath();
+        let vertex = vertices[vertices.length - 1];
+        ctx.moveTo(
+            ((vertex.x) / this.zoom) + (gridConfig.width * this.offsetX),
+            ((vertex.y) / this.zoom) + (gridConfig.height * (this.offsetY / 2))
+            );
+        for(let _i = 0; _i < vertices.length; _i++) {
+            vertex = vertices[_i];
+            ctx.lineTo(
+                ((vertex.x) / this.zoom) + (gridConfig.width * this.offsetX),
+                ((vertex.y) / this.zoom) + (gridConfig.height * (this.offsetY / 2))
+                );
+        }
+        ctx.strokeStyle = new Color(64, 64, 255, 1).getRgbaString();
+        ctx.stroke();
     }
 
 }
