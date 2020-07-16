@@ -1,7 +1,13 @@
 import React from 'react';
-import ISOCanvasProps from '../props/ISOCanvasProps';
 import ISOGridConfig from '../model/ISOGridConfig';
 import ISOGrid from '../model/ISOGrid';
+
+export interface ISOCanvasProps {
+    side: number,
+    canvasRef: any,
+    rows: number,
+    columns: number
+}
 
 class ISOCanvas extends React.Component<ISOCanvasProps> {
     componentDidMount() {
