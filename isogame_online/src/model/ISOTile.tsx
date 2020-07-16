@@ -1,4 +1,5 @@
 import ISOGridConfig from "../model/ISOGridConfig";
+import Color from "../interfaces/Color";
 
 export interface ISOTileVertex {
     x: number,
@@ -26,17 +27,19 @@ export class ISOTileVertices {
 export default class ISOTile {
     row: number;
     column: number;
+    color: Color;
 
-    constructor(row: number, column: number) {
+    constructor(row: number, column: number, color?: Color) {
         this.row = row;
         this.column = column;
+        this.color = color != undefined ? color : Color.BLACK;
     }
 
     public getColor(): string {
         if((this.row % 2 === 0 && this.column % 2 === 0) || (this.row % 2 === 1 && this.column % 2 === 1)) {
-            return "rgba(0, 0, 0, 0.3)";
+            return this.color.opaque(0.8).getRgbaString();
         } else {
-            return "rgba(0, 0, 0, 0.5)";
+            return this.color.opaque(0.3).getRgbaString();
         }
     }
 
