@@ -8,7 +8,7 @@ import ArrowKeyPress from '../interfaces/ArrowKeyPress';
 import KeyPressType from '../enums/KeyPressType';
 
 const zeroPad = (num: number, places: number) => String(num).padStart(places, '0');
-const velocity = 0.3    ;
+const velocity = 0.5;
 
 export interface ISOCanvasProps {
     canvasRef: any,

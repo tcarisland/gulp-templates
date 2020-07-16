@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <ISOCanvas tileWidth={25} tileHeight={25} rows={25} columns={25} canvasRef={createRef()} />
+        <ISOCanvas tileWidth={50} tileHeight={50} rows={11} columns={11} canvasRef={createRef()} />
         <ArrowsPreview side={130}/>
       </header>
     </div>

@@ -22,6 +22,22 @@ export class ISOTileVertices {
     public getVertices(): ISOTileVertex[] {
         return [ this.nw, this.ne, this.se, this.sw ];
     }
+
+    public getIsoVertices(): ISOTileVertex[] {
+        return [
+            { x: this.isoX(this.nw.x, this.nw.y), y: this.isoY(this.nw.x, this.nw.y) },
+            { x: this.isoX(this.ne.x, this.ne.y), y: this.isoY(this.ne.x, this.ne.y) },
+            { x: this.isoX(this.se.x, this.se.y), y: this.isoY(this.se.x, this.se.y) },
+            { x: this.isoX(this.sw.x, this.sw.y), y: this.isoY(this.sw.x, this.sw.y) }
+        ];
+    }
+
+    private isoX(xc: number, yc: number) {
+        return xc - yc;
+    };
+    private isoY(xc: number, yc: number) {
+        return (xc + yc) / 2;
+    }
 }
 
 export default class ISOTile {
@@ -50,22 +66,15 @@ export default class ISOTile {
         return new ISOTileVertices(this.row, this.column, gridConfig.getTileWidth(), gridConfig.getTileHeight());
     }
 
-    private isoX(xc: number, yc: number) {
-        return ((xc - yc) / this.zoom) ;
-    };
-    private isoY(xc: number, yc: number) {
-        return ((xc + yc) / (this.zoom * 2));
-    }
-
     public render2D(ctx: CanvasRenderingContext2D, gridConfig: ISOGridConfig, color: Color) {
         ctx.beginPath();
         let v = this.create2DVertices(gridConfig);
-        let vertices = v.getVertices();
+        let vertices = v.getIsoVertices();
         for(let _i = 0; _i < vertices.length; _i++) {
             let vertex = vertices[_i];
             ctx.lineTo(
-                this.isoX(vertex.x, vertex.y) + (gridConfig.width * this.offsetX),
-                this.isoY(vertex.x, vertex.y) + (gridConfig.height * (this.offsetY / 2))
+                ((vertex.x) / this.zoom) + (gridConfig.width * this.offsetX),
+                ((vertex.y) / this.zoom) + (gridConfig.height * (this.offsetY / 2))
                 );
         }
         ctx.fillStyle = color.getRgbaString();
