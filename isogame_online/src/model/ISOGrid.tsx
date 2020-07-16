@@ -11,7 +11,7 @@ export default class ISOGrid {
     constructor(config: ISOGridConfig) {
         this.config = config;
         this.tiles = []; 
-        this.active = new ISOTile(3.5, 2.5, Color.WHITE);
+        this.active = new ISOTile(3, 2.5, Color.WHITE);        
     }
     drawGrid(ctx: CanvasRenderingContext2D) {
         let boxColor: string;

@@ -10,11 +10,15 @@ export default class Color {
         this.r = r;
         this.g = g;
         this.b = b;
-        this.alpha = alpha != undefined ? alpha : 1;
+        this.alpha = alpha !== undefined ? alpha : 1;
     }
 
     public opaque(alpha: number): Color {
         return new Color(this.r, this.g, this.b, alpha);
+    }
+
+    public darken(alpha: number) {
+        return new Color(this.r, this.g, this.b, this.alpha + alpha);
     }
 
     getRgbaString(): string {

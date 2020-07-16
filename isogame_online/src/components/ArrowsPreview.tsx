@@ -4,7 +4,6 @@ import ArrowKeyPress from '../interfaces/ArrowKeyPress';
 import ArrowKeyProps from '../interfaces/ArrowKeyProps';
 import KeyPressEventQueue from '../events/KeyPressEventQueue';
 import ArrowKeyButtons from '../resources/ArrowKeyButtons.json';
-import KeyPress from '../interfaces/KeyPress';
 import KeyPressType from '../enums/KeyPressType';
 
 interface ArrowsPreviewProps {
