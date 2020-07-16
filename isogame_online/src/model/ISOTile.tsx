@@ -57,7 +57,7 @@ export default class ISOTile {
         return ((xc + yc) / (this.zoom * 2));
     }
 
-    public render2D(ctx: CanvasRenderingContext2D, gridConfig: ISOGridConfig) {
+    public render2D(ctx: CanvasRenderingContext2D, gridConfig: ISOGridConfig, color: Color) {
         ctx.beginPath();
         let v = this.create2DVertices(gridConfig);
         let vertices = v.getVertices();
@@ -68,7 +68,7 @@ export default class ISOTile {
                 this.isoY(vertex.x, vertex.y) + (gridConfig.height * (this.offsetY / 2))
                 );
         }
-        ctx.fillStyle = this.getColor().getRgbaString();
+        ctx.fillStyle = color.getRgbaString();
         ctx.fill();
     }
 
