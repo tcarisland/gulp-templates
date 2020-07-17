@@ -1,5 +1,8 @@
 import ISOGridConfig from "../model/ISOGridConfig";
 import Color from "../interfaces/Color";
+import grass0001 from "../resources/images/tiles/grass0001.png";
+import grass0002 from "../resources/images/tiles/grass0002.png";
+import grass0003 from "../resources/images/tiles/grass0003.png";
 
 export interface ISOTileVertex {
     x: number,
@@ -73,9 +76,9 @@ export default class ISOTile {
 
     public getColor(): Color {
         if((this.row % 2 === 0 && this.column % 2 === 0) || (this.row % 2 === 1 && this.column % 2 === 1)) {
-            return this.color.opaque(0.8);
+            return this.color.opaque(0.2);
         } else {
-            return this.color.opaque(0.3);
+            return this.color.opaque(0.1);
         }
     }
 
@@ -98,20 +101,47 @@ export default class ISOTile {
         ctx.fill();
     }
 
+    public isoXToWorldSpace(x: number, gridConfig: ISOGridConfig) {
+        return (x / this.zoom) + (gridConfig.width * this.offsetX);
+    }
+
+    public isoYToWorldSpace(y: number, gridConfig: ISOGridConfig) {
+        return (y / this.zoom) + (gridConfig.height * (this.offsetY / 2));
+    }
+
+    public drawImage(ctx: CanvasRenderingContext2D, gridConfig: ISOGridConfig) {
+        let vertices = this.create2DVertices(gridConfig).getEnclosingBox();
+
+        let rectWidth = this.isoXToWorldSpace(vertices[1].x, gridConfig) - this.isoXToWorldSpace(vertices[0].x, gridConfig);
+        let rectHeight = this.isoYToWorldSpace(vertices[3].y, gridConfig) - this.isoYToWorldSpace(vertices[0].y, gridConfig);
+
+        let img = new Image();
+        if((this.row % 2 === 0 && this.column % 2 === 0) || (this.row % 2 === 1 && this.column % 2 === 1)) {
+            img.src = grass0002;
+        } else {
+            img.src = grass0003;
+        }
+        ctx.drawImage(img,
+            this.isoXToWorldSpace(vertices[0].x, gridConfig),
+            this.isoYToWorldSpace(vertices[0].y, gridConfig),
+            rectWidth,
+            rectWidth
+            );
+    }
+
     public renderEnclosingBox(ctx: CanvasRenderingContext2D, gridConfig: ISOGridConfig) {
         let vertices = this.create2DVertices(gridConfig).getEnclosingBox();
-        console.log(vertices);
         ctx.beginPath();
         let vertex = vertices[vertices.length - 1];
         ctx.moveTo(
-            ((vertex.x) / this.zoom) + (gridConfig.width * this.offsetX),
-            ((vertex.y) / this.zoom) + (gridConfig.height * (this.offsetY / 2))
+            this.isoXToWorldSpace(vertex.x, gridConfig),
+            this.isoYToWorldSpace(vertex.y, gridConfig)
             );
         for(let _i = 0; _i < vertices.length; _i++) {
             vertex = vertices[_i];
             ctx.lineTo(
-                ((vertex.x) / this.zoom) + (gridConfig.width * this.offsetX),
-                ((vertex.y) / this.zoom) + (gridConfig.height * (this.offsetY / 2))
+                this.isoXToWorldSpace(vertex.x, gridConfig),
+                this.isoYToWorldSpace(vertex.y, gridConfig)
                 );
         }
         ctx.strokeStyle = new Color(64, 64, 255, 1).getRgbaString();
