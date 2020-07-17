@@ -68,7 +68,7 @@ class ISOCanvas extends React.Component<ISOCanvasProps> {
                     ref= { this.props.canvasRef }
                     width=  { this.getWorldWidth() }
                     height= { this.getCanvasHeight() }
-                    style={Object.assign({backgroundColor: "white"}, {display: "block"})}>                
+                    style={Object.assign({backgroundColor: "rgba(255, 255, 255, 0)"}, {display: "block"})}>                
                 </canvas>
             </div>
         );

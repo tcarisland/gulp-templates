@@ -68,7 +68,7 @@ export default class ISOTile {
     constructor(row: number, column: number, color?: Color) {
         this.row = row;
         this.column = column;
-        this.color = color !== undefined ? color : Color.BLACK;
+        this.color = color !== undefined ? color : Color.WHITE;
     }
 
     public getColor(): Color {
