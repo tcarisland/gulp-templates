@@ -8,7 +8,7 @@ import ArrowKeyPress from '../interfaces/ArrowKeyPress';
 import KeyPressType from '../enums/KeyPressType';
 
 const zeroPad = (num: number, places: number) => String(num).padStart(places, '0');
-const velocity = 0.5;
+const velocity = 0.1;
 
 export interface ISOCanvasProps {
     canvasRef: any,
@@ -48,7 +48,7 @@ class ISOCanvas extends React.Component<ISOCanvasProps> {
                 grid.active = active;
                 ctx.clearRect(0, 0, width, height);
                 grid.drawGrid(ctx);
-                active.renderEnclosingBox(ctx, grid.config);
+                //active.renderEnclosingBox(ctx, grid.config);
             }
         });
     }

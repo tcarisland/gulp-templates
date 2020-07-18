@@ -23,6 +23,7 @@ export default class ISOGrid {
                 //this.tiles[a][b].render2D(ctx, this.config, this.tiles[a][b].getColor());
             }
         }
-        this.active.render2D(ctx, this.config, new Color(255, 0, 0, 0.8));
+        this.active.drawUpwardSprite(ctx, this.config);
+        //this.active.render2D(ctx, this.config, new Color(255, 0, 0, 0.8));
     }
 }

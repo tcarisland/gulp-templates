@@ -1,8 +1,8 @@
 import ISOGridConfig from "../model/ISOGridConfig";
 import Color from "../interfaces/Color";
-import grass0001 from "../resources/images/tiles/grass0001.png";
 import grass0002 from "../resources/images/tiles/grass0002.png";
 import grass0003 from "../resources/images/tiles/grass0003.png";
+import grass0004 from "../resources/images/tiles/grass0004.png";
 
 export interface ISOTileVertex {
     x: number,
@@ -113,7 +113,6 @@ export default class ISOTile {
         let vertices = this.create2DVertices(gridConfig).getEnclosingBox();
 
         let rectWidth = this.isoXToWorldSpace(vertices[1].x, gridConfig) - this.isoXToWorldSpace(vertices[0].x, gridConfig);
-        let rectHeight = this.isoYToWorldSpace(vertices[3].y, gridConfig) - this.isoYToWorldSpace(vertices[0].y, gridConfig);
 
         let img = new Image();
         if((this.row % 2 === 0 && this.column % 2 === 0) || (this.row % 2 === 1 && this.column % 2 === 1)) {
@@ -124,6 +123,22 @@ export default class ISOTile {
         ctx.drawImage(img,
             this.isoXToWorldSpace(vertices[0].x, gridConfig),
             this.isoYToWorldSpace(vertices[0].y, gridConfig),
+            rectWidth,
+            rectWidth
+            );
+    }
+
+    public drawUpwardSprite(ctx: CanvasRenderingContext2D, gridConfig: ISOGridConfig) {
+        let vertices = this.create2DVertices(gridConfig).getEnclosingBox();
+
+        let rectWidth = this.isoXToWorldSpace(vertices[1].x, gridConfig) - this.isoXToWorldSpace(vertices[0].x, gridConfig);
+        let rectHeight = this.isoYToWorldSpace(vertices[3].y, gridConfig) - this.isoYToWorldSpace(vertices[0].y, gridConfig);
+
+        let img = new Image();
+        img.src = grass0004;
+        ctx.drawImage(img,
+            this.isoXToWorldSpace(vertices[0].x, gridConfig),
+            this.isoYToWorldSpace(vertices[0].y, gridConfig) - rectHeight,
             rectWidth,
             rectWidth
             );
