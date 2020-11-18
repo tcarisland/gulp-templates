@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Tc Font Utils
+Plugin Name: TC Font Utils
 Plugin URI: http://www.tcarisland.no
 Description: A set of utilities for previewing fonts in WordPress
 Author: Thor Christopher Arisland
