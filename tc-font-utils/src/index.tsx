@@ -4,6 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+declare global {
+  interface Window { tcReactPlugin: any; }
+}
+
 const reactAppData = window.tcReactPlugin || {}
 const { appSelector } = reactAppData
 const appAnchorElement = document.querySelector(appSelector)
