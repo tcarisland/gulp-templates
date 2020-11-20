@@ -73,6 +73,12 @@ function tc_load_react_app($hook) {
         wp_enqueue_script('font-utils-' . $index, $react_app_build . $js_file, array(), 1, true);
 	}
 	wp_localize_script( 'font-utils-0', 'tcReactPlugin', array('appSelector' => '#tc-font-utils-wrapper'));
+	tc_enqueue_bootstrap_deps();
+}
+
+function tc_enqueue_bootstrap_deps() {
+	$bootstrap_prefix = 'font-utils-bootstrap-';
+    wp_enqueue_style( $bootstrap_prefix . "css", "https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css");
 }
 
 function tc_filter_js_files($file_string) {
